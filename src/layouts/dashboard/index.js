@@ -97,7 +97,7 @@ const DashboardLayout = () => {
                       borderRadius: 1.5,
                     }}>
                     <IconButton
-                      sx={{ width: "max-content", color: theme.palette.mode == "light" ? "#000" : "#fff" }}
+                      sx={{ width: "max-content", color: theme.palette.mode === "light" ? "#000" : "#fff" }}
                       key={el.index}>
                       {el.icon}
                     </IconButton>
@@ -114,7 +114,7 @@ const DashboardLayout = () => {
                       onClick={() => {
                         setSelected(el.index);
                       }}
-                      sx={{ width: "max-content", color: theme.palette.mode == "light" ? "#000" : "#fff" }}
+                      sx={{ width: "max-content", color: theme.palette.mode === "light" ? "#000" : "#fff" }}
                       key={el.index}>
                       {el.icon}
                     </IconButton>
@@ -122,14 +122,14 @@ const DashboardLayout = () => {
 
               ))}
               <Divider sx={{ width: "48px" }} />
-              {selected == 3 ?
+              {selected === 3 ?
                 <Box
                   p={1}
                   sx={{
                     backgroundColor: theme.palette.primary.main,
                     borderRadius: 1.5,
                   }}>
-                  <IconButton sx={{ width: "max-content", color: theme.palette.mode == "light" ? "#000" : "#fff" }}>
+                  <IconButton sx={{ width: "max-content", color: theme.palette.mode === "light" ? "#000" : "#fff" }}>
                     <Gear>
 
                     </Gear>
@@ -141,7 +141,7 @@ const DashboardLayout = () => {
                 <IconButton onClick={() => {
                   setSelected(3);
                 }}
-                  sx={{ width: "max-content", color: theme.palette.mode == "light" ? "#000" : "#fff" }}>
+                  sx={{ width: "max-content", color: theme.palette.mode === "light" ? "#000" : "#fff" }}>
                   <Gear>
 
                   </Gear>
