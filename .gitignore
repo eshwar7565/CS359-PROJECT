@@ -21,5 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 
 #my updates 
+=======
+#my updates
+>>>>>>> 27fbbccb87462201bcf62d2d0ca7114eaddc6df4
