@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Stack, } from '@mui/material';
 import Header from './Header';
 import Footer from './Footer';
+import Message from './Message';
 
 const Conversation = () => {
   return (
@@ -18,8 +19,9 @@ const Conversation = () => {
       }
       <Box width={"100%"}
         sx={{
-          flexGrow: 1,
+          flexGrow: 1, height : "100%" , overflowY:"scroll"
         }}>
+        <Message></Message>
       </Box>
       {
         // Chat Footer

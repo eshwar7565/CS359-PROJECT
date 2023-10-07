@@ -14,7 +14,7 @@ const GeneralApp = () => {
       sx={{
         width: "100%", height: "100%", 
         backgroundColor :  theme.palette.mode === "light"
-        ? "#FFF"
+        ? "#F0F4FA"
         : theme.palette.background.default,
 
       }}
