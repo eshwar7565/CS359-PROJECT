@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Divider, Box, Stack, Typography, Link, IconButton } from '@mui/material';
 
-import {DownloadSimple, Image } from 'phosphor-react';
+import { DotsThreeVertical, DownloadSimple, Image } from 'phosphor-react';
 
 
 
@@ -22,29 +22,29 @@ const DocMsg = ({ el }) => {
                     width: "max-content",
 
                 }}>
-         
 
-            <Stack spacing={2}>
 
-                <Stack p={2} direction={"row"} spacing={3}
-                    alignItems={"center"}
-                    sx={{
-                        backgroundColor: theme.palette.background.paper,
-                        borderRadius: 1,
-                    }}>
-                    <Image size={48} />
-                    <Typography variant='caption'>Abstract.png</Typography>
-                    <IconButton>
-                    <DownloadSimple></DownloadSimple>
-                    </IconButton>
+                <Stack spacing={2}>
 
+                    <Stack p={2} direction={"row"} spacing={3}
+                        alignItems={"center"}
+                        sx={{
+                            backgroundColor: theme.palette.background.paper,
+                            borderRadius: 1,
+                        }}>
+                        <Image size={48} />
+                        <Typography variant='caption'>Abstract.png</Typography>
+                        <IconButton>
+                            <DownloadSimple></DownloadSimple>
+                        </IconButton>
+
+                    </Stack>
+                    <Typography variant='body2'
+                        sx={{ color: el.incoming ? theme.palette.text : "#FFF" }}>
+                        {el.message}
+                    </Typography>
                 </Stack>
-                <Typography variant='body2'
-            sx= {{color : el.incoming ? theme.palette.text :"#FFF"}}>
-            {el.message}
-            </Typography>
-            </Stack>
-            </Box> 
+            </Box>
         </Stack>
 
     )
@@ -217,6 +217,7 @@ const TextMsg = ({ el }) => {
                 </Typography>
 
             </Box>
+            <DotsThreeVertical size={20}/>
         </Stack>
     )
 }
@@ -240,5 +241,6 @@ const Timeline = ({ el }) => {
         </Stack>
     )
 };
+
 
 export { Timeline, MediaMsg, TextMsg, ReplyMsg, LinkMsg, DocMsg };
