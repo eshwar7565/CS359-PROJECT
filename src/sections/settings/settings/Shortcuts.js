@@ -105,7 +105,7 @@ const list = [
 
 const ShortcutDialog = ({ open, handleClose }) => {
   return (
-  
+    <>
       <Dialog
         fullWidth
         maxWidth="md"
@@ -159,7 +159,7 @@ const ShortcutDialog = ({ open, handleClose }) => {
           </Button>
         </DialogActions>
       </Dialog>
-  
+    </>
   );
 };
 
