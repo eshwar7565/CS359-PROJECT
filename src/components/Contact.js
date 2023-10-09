@@ -1,9 +1,8 @@
-import React,{ useState } from 'react'
+import React, { useState } from 'react'
 import { Box, Button, Stack, Typography, IconButton, Avatar, Divider } from '@mui/material'
 import { useTheme } from '@mui/material/styles';
 import { faker } from "@faker-js/faker";
 import {
-
     Bell,
     CaretRight,
     Phone,
@@ -11,7 +10,6 @@ import {
     Prohibit,
     Star,
     Trash,
-  
     X,
 } from "phosphor-react";
 
@@ -25,8 +23,12 @@ import AntSwitch from "../components/AntSwitch";
 
 const Contact = () => {
     const theme = useTheme();
-    const [openBlock, setOpenBlock] = useState(false);
-    const [openDelete, setOpenDelete] = useState(false);
+    const [
+        // openBlock,
+        setOpenBlock] = useState(false);
+    const [
+        // openDelete,
+        setOpenDelete] = useState(false);
     const dispatch = useDispatch();
 
     return (
@@ -200,7 +202,7 @@ const Contact = () => {
                     <Stack direction="row" alignItems={"center"} spacing={2}>
                         <Avatar src={faker.image.imageUrl()} alt={faker.name.fullName()} />
                         <Stack direction="column" spacing={0.5}>
-                            <Typography variant="subtitle2">Camel’s Gang</Typography>
+                            <Typography variant="subtitle2">Camel Gang</Typography>
                             <Typography variant="caption">
                                 Owl, Parrot, Rabbit , You
                             </Typography>
@@ -208,28 +210,28 @@ const Contact = () => {
                     </Stack>
                     <Divider />
                     <Stack direction="row" alignItems={"center"} spacing={2}>
-                    <Button
-                      onClick={() => {
-                        setOpenBlock(true);
-                      }}
-                      fullWidth
-                      startIcon={<Prohibit />}
-                      variant="outlined"
-                    >
-                      Block
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        setOpenDelete(true);
-                      }}
-                      fullWidth
-                      startIcon={<Trash />}
-                      variant="outlined"
-                    >
-                      Delete
-                    </Button>
-                  </Stack>
-              
+                        <Button
+                            onClick={() => {
+                                setOpenBlock(true);
+                            }}
+                            fullWidth
+                            startIcon={<Prohibit />}
+                            variant="outlined"
+                        >
+                            Block
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                setOpenDelete(true);
+                            }}
+                            fullWidth
+                            startIcon={<Trash />}
+                            variant="outlined"
+                        >
+                            Delete
+                        </Button>
+                    </Stack>
+
 
 
                 </Stack>
