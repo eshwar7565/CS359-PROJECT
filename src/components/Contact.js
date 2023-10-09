@@ -13,6 +13,16 @@ import {
     X,
 } from "phosphor-react";
 
+
+import {
+
+    Slide,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+} from "@mui/material";
 import {
     useDispatch,
 } from "react-redux";
@@ -21,15 +31,72 @@ import {
 } from "../redux/slices/app";
 import AntSwitch from "../components/AntSwitch";
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const BlockDialog = ({ open, handleClose }) => {
+    return (
+        <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-describedby="alert-dialog-slide-description"
+        >
+            <DialogTitle>Block this contact</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-slide-description">
+                    Are you sure you want to block this Contact?
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleClose}>Yes</Button>
+            </DialogActions>
+        </Dialog>
+    );
+};
+
+const DeleteChatDialog = ({ open, handleClose }) => {
+    return (
+        <Dialog
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-describedby="alert-dialog-slide-description"
+        >
+            <DialogTitle>Delete this chat</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-slide-description">
+                    Are you sure you want to delete this chat?
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleClose}>Yes</Button>
+            </DialogActions>
+        </Dialog>
+    );
+};
+
 const Contact = () => {
     const theme = useTheme();
     const [
-        // openBlock,
+        openBlock,
         setOpenBlock] = useState(false);
     const [
-        // openDelete,
+        openDelete,
         setOpenDelete] = useState(false);
     const dispatch = useDispatch();
+
+    const handleCloseBlock = () => {
+        setOpenBlock(false);
+    }
+    const handleCloseDelete = () => {
+        setOpenDelete(false);
+    }
 
     return (
 
@@ -231,7 +298,8 @@ const Contact = () => {
                             Delete
                         </Button>
                     </Stack>
-
+                    {openBlock && <BlockDialog open={openBlock} handleClose={handleCloseBlock} />}
+                    {openDelete && <DeleteChatDialog open={openDelete} handleClose={handleCloseDelete} />}
 
 
                 </Stack>

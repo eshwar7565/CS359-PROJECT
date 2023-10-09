@@ -7,7 +7,7 @@ import { DotsThreeVertical, DownloadSimple, Image } from 'phosphor-react';
 import { Message_options } from '../../data';
 
 
-const DocMsg = ({ el }) => {
+const DocMsg = ({ el,menu }) => {
     const theme = useTheme();
 
     return (
@@ -46,7 +46,7 @@ const DocMsg = ({ el }) => {
                     </Typography>
                 </Stack>
             </Box>
-            <MessageOption />
+            { menu &&  < MessageOption /> } 
         </Stack>
 
     )
@@ -54,7 +54,7 @@ const DocMsg = ({ el }) => {
 
 
 
-const LinkMsg = ({ el }) => {
+const LinkMsg = ({ el ,menu}) => {
     const theme = useTheme();
 
     return (
@@ -102,7 +102,7 @@ const LinkMsg = ({ el }) => {
                 </Stack>
 
             </Box>
-            <MessageOption />
+            { menu &&  < MessageOption /> } 
         </Stack>
 
     )
@@ -111,7 +111,7 @@ const LinkMsg = ({ el }) => {
 
 
 
-const ReplyMsg = ({ el }) => {
+const ReplyMsg = ({ el,menu}) => {
     const theme = useTheme();
     return (
         <Stack direction="row" justifyContent={el.incoming ? "start" : "end"}>
@@ -152,7 +152,7 @@ const ReplyMsg = ({ el }) => {
                         }> {el.message}</Typography>
                 </Stack>
             </Box>
-            <MessageOption />
+            { menu &&  < MessageOption /> } 
         </Stack>
     )
 }
@@ -161,7 +161,7 @@ const ReplyMsg = ({ el }) => {
 
 
 
-const MediaMsg = ({ el }) => {
+const MediaMsg = ({ el,menu }) => {
     const theme = useTheme();
     return (
         <Stack direction="row" justifyContent={el.incoming ? "start" : "end"}>
@@ -189,7 +189,7 @@ const MediaMsg = ({ el }) => {
 
 
             </Box>
-            <MessageOption />
+            { menu &&  < MessageOption /> } 
 
         </Stack>
 
@@ -200,7 +200,7 @@ const MediaMsg = ({ el }) => {
 
 
 
-const TextMsg = ({ el }) => {
+const TextMsg = ({ el , menu}) => {
     const theme = useTheme();
     return (
 
@@ -221,7 +221,7 @@ const TextMsg = ({ el }) => {
                 </Typography>
 
             </Box>
-            <MessageOption />
+          { menu &&  < MessageOption /> } 
         </Stack>
     )
 }

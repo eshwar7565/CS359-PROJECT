@@ -6,6 +6,7 @@ import Conversation from "../../components/Conversation/index.js";
 import Contact from "../../components/Contact.js";
 import { useSelector } from "react-redux";
 import SharedMessages from "../../components/SharedMessages.js";
+import StarredMessages from "../../components/StarredMessages.js";
 const GeneralApp = () => {
 
   const theme = useTheme();
@@ -40,7 +41,7 @@ const GeneralApp = () => {
               return <Contact />;
 
             case "STARRED":
-              break;
+              return <StarredMessages/>;
 
             case "SHARED":
               return <SharedMessages />;
