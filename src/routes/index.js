@@ -25,6 +25,9 @@ export default function Router() {
       element: <AuthLayout />,
       children: [
         { path: "login", element: <LoginPage /> },
+        { path: "register", element: <RegisterPage /> },
+        { path: "reset-password", element: <ResetPassword /> },
+
         
       ],
     },
@@ -53,5 +56,9 @@ const LoginPage = Loadable(
 const Settings = Loadable(
   lazy(() => import("../pages/dashboard/Settings")),
 );
+const RegisterPage =
+ Loadable(lazy(() => import("../pages/auth/Register")));
+ const ResetPassword =
+ Loadable(lazy(() => import("../pages/auth/ResetPassword")));
 
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));

@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 
 
-
+import { Link as RouterLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -83,7 +83,7 @@ const LoginForm = () => {
             </Stack>
 
             <Stack alignItems="flex-end" sx={{ my: 2 }}>
-                <Link>
+                <Link component={RouterLink} to="/auth/reset-password">
                     Forgot password?
                 </Link>
             </Stack>
