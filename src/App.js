@@ -1,18 +1,33 @@
 // routes
-import Router from "./routes";
 // theme
-import ThemeProvider from './theme';
 // components
-import ThemeSettings from './components/settings';
+import React from "react";
+
+import ThemeSettings from "./components/settings";
+import ThemeProvider from "./theme";
+import Router from "./routes";
+
+
+
+
 
 function App() {
+
+
+
+
   return (
+
     <ThemeProvider>
       <ThemeSettings>
         {" "}
         <Router />{" "}
       </ThemeSettings>
     </ThemeProvider>
+
+
+
+
   );
 }
 

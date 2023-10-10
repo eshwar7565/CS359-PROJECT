@@ -53,4 +53,5 @@ const LoginPage = Loadable(
 const Settings = Loadable(
   lazy(() => import("../pages/dashboard/Settings")),
 );
+
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));
