@@ -19,14 +19,14 @@ const SimpleBarStyle = styled(SimpleBarReact)(({ theme }) => ({
       backgroundColor: alpha(theme.palette.grey[600], 0.48),
     },
     '&.simplebar-visible:before': {
-      opacity: 1,
+      opacity: 0.5,
     },
   },
   '& .simplebar-track.simplebar-vertical': {
-    width: 10,
+    width: 5,
   },
   '& .simplebar-track.simplebar-horizontal .simplebar-scrollbar': {
-    height: 6,
+    height: 1,
   },
   '& .simplebar-mask': {
     zIndex: 'inherit',

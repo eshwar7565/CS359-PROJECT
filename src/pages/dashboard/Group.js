@@ -39,10 +39,10 @@ const Group = () => {
 
                 <Box
                     sx={{
-                        overflowY: "scroll",
+
 
                         height: "100vh",
-                        width: 320,
+                        width: 380,
                         backgroundColor:
                             theme.palette.mode === "light"
                                 ? "#F8FAFF"
