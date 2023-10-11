@@ -151,7 +151,7 @@ const Contact = () => {
                         height: "100%",
                         position: "relative",
                         flexGrow: 1,
-                        overflow: "scroll",
+                        overflowY: "scroll",
                     }}
                     p={3}
                     spacing={3}
