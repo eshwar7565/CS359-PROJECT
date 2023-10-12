@@ -18,6 +18,7 @@ import {
     SearchIconWrapper,
     StyledInputBase,
 } from "../../components/Search";
+import CreateGroup from '../../sections/main/CreateGroup';
 
 import { useTheme } from "@mui/material/styles";
 
@@ -32,6 +33,7 @@ const Group = () => {
     }
 
     const theme = useTheme();
+    
     return (
         <>
             <Stack direction="row" sx={{ width: "100%" }}>
@@ -111,6 +113,7 @@ const Group = () => {
                 </Box>
 
             </Stack>
+            {openDialog && <CreateGroup open={openDialog} handleClose={handleCloseDialog} />}
         </>
     )
 }
