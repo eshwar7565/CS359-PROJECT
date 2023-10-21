@@ -1,26 +1,31 @@
 import React from 'react'
 import { useState } from "react";
 import * as Yup from "yup";
-
-
-
 import { Link as RouterLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Link, Stack, Button, IconButton, InputAdornment } from "@mui/material";
+import { Link, Stack,Alert, IconButton, InputAdornment } from "@mui/material";
+
+
+import { LoadingButton } from "@mui/lab";
 
 import FormProvider from '../../../components/hook-form/FormProvider';
 import RHFTextField from '../../../components/hook-form/RHFTextFiled';
-import {
-    //  useDispatch, 
-    // useSelector
-} from "react-redux";
+
+
+import { LoginUser } from "../../../redux/slices/auth";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Eye, EyeSlash } from "phosphor-react";
 const LoginForm = () => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
-    // const { isLoading } = useSelector((state) => state.auth);
+    const { isLoading } = useSelector((state) => state.auth);
+
+  
+
+
     const LoginSchema = Yup.object().shape({
         email: Yup.string()
             .required("Email is required")
@@ -28,38 +33,42 @@ const LoginForm = () => {
         password: Yup.string().required("Password is required"),
     });
     const defaultValues = {
-        email: "demo@gmail.com",
-        password: "demo1234",
+        email: "codingmonk@gmail.com",
+        password: "1234567",
     };
     const methods = useForm({
         resolver: yupResolver(LoginSchema),
         defaultValues,
     });
-    // const {
-    // reset,
-    // setError,
-    // handleSubmit,
-    // formState: { errors },
-    // } = methods;
+    const {
+    reset,
+    setError,
+    handleSubmit,
+    formState: { errors },
+    } = methods;
 
-    // const onSubmit = async (data) => {
-    //     try {
-    //         console.log(data);
-    //         // submit data to backend
-    //         // dispatch(LoginUser(data));
-    //     } catch (error) {
-    //         console.error(error);
-    //         reset();
-    //         setError("afterSubmit", {
-    //             ...error,
-    //             message: error.message,
-    //         });
-    //     }
-    // };
+    const onSubmit = async (data) => {
+        try {
+            console.log(data);
+            // submit data to backend
+            dispatch(LoginUser(data));
+        } catch (error) {
+            console.error(error);
+            reset();
+            setError("afterSubmit", {
+                ...error,
+                message: error.message,
+            });
+        }
+    };
+
+   
     return (
-        <FormProvider methods={methods} >
+        <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3}>
-
+            {!!errors.afterSubmit && (
+                <Alert severity="error">{errors.afterSubmit.message}</Alert>
+              )}
 
                 <RHFTextField name="email" label="Email address" />
 
@@ -87,13 +96,14 @@ const LoginForm = () => {
                     Forgot password?
                 </Link>
             </Stack>
-            <Button
+            <LoadingButton 
+
                 fullWidth
                 color="inherit"
                 size="large"
                 type="submit"
                 variant="contained"
-
+                loading={isLoading}
                 sx={{
                     bgcolor: "text.primary",
                     color: (theme) =>
@@ -106,7 +116,7 @@ const LoginForm = () => {
                 }}
             >
                 Login
-            </Button>
+            </LoadingButton>
 
 
         </FormProvider>
