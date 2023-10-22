@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, Box, Button, Divider, IconButton, Stack, Typography } from '@mui/material';
-import { ArchiveBox, CircleDashed, MagnifyingGlass } from 'phosphor-react';
+import { ArchiveBox, CircleDashed, MagnifyingGlass, Users } from 'phosphor-react';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import { SimpleBarStyle } from '../../components/Scrollbar';
@@ -128,10 +128,25 @@ const Chats = () => {
                     <Typography variant='h5'>
                         Chats
                     </Typography>
+
+                    <Stack direction="row"
+                    alignItems="center" 
+                    spacing={1}>
+                    <IconButton onClick={
+                        (
+                            {
+                                
+                            }
+                        )
+                    }>
+                        <Users/>
+                    </IconButton>
                     <IconButton>
                         <CircleDashed>
                         </CircleDashed>
                     </IconButton>
+                    </Stack>
+                    
 
 
                 </Stack>
