@@ -9,7 +9,7 @@ import Router from "./routes";
 import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { useDispatch, useSelector } from "react-redux";
-import { showSnackbar , closeSnackBar } from "./redux/slices/app";
+import {   closeSnackBar } from "./redux/slices/app";
 
 const vertical = "bottom";
 const horizontal = "center";
@@ -24,9 +24,9 @@ function App() {
 
   const dispatch = useDispatch();
 
-  // const {  open ,severity, message } = useSelector(
-  //   (state) => state.app.snackbar
-  // );
+  const {  open ,severity, message  } = useSelector(
+    (state) => state.app.snackbar
+  );
 
 
   return (
@@ -40,28 +40,31 @@ function App() {
   </ThemeProvider>
 
 
-    <Snackbar
-      anchorOrigin={{ vertical, horizontal }}
-      // open={open} 
-      autoHideDuration={4000}
-      key={vertical + horizontal}
-      onClose={() => {
-        console.log("This is clicked");
-        dispatch(closeSnackBar());
-      }}
-    >
-      <Alert
-        onClose={() => {
-          console.log("This is clicked");
-          dispatch(closeSnackBar());
-        }}
-        // severity={severity}
-        sx={{ width: "100%" }}
-      >
-        
-      </Alert>
-    </Snackbar>
-
+     {message && open ? (
+        <Snackbar
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          autoHideDuration={4000}
+          key={vertical + horizontal}
+          onClose={() => {
+            console.log("This is clicked");
+            dispatch(closeSnackBar());
+          }}
+        >
+          <Alert
+            onClose={() => {
+              console.log("This is clicked");
+              dispatch(closeSnackBar());
+            }}
+            severity={severity}
+            sx={{ width: "100%" }}
+          >
+            {message}
+          </Alert>
+        </Snackbar>
+      ) : (
+        <></>
+      )}
     
     </>
  
