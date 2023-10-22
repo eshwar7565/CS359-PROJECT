@@ -21,7 +21,7 @@ import { Eye, EyeSlash } from "phosphor-react";
 const LoginForm = () => {
     const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
-    const { isLoading } = useSelector((state) => state.auth);
+  const isLoading = false;
 
   
 

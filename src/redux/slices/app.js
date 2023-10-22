@@ -1,42 +1,52 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-// import { dispatch } from '../store';
+
 
 const initialState = {
-   
-    sideBar: {
-      open: false,
-      type: "CONTACT", // can be CONTACT, STARRED, SHARED
-    }
+
+  sideBar: {
+    open: false,
+    type: "CONTACT", // can be CONTACT, STARRED, SHARED
+  },
+
+  snackbar: {
+    open: false,
+    severity: null,
+    message: null,
+  },
+
 }
 
+
 const slice = createSlice({
-    name: "app",
-    initialState,
+  name: "app",
+  initialState,
 
-    reducers: {
-        toggleSideBar(state) {
-            state.sideBar.open = !state.sideBar.open;
-          },
+  reducers: {
+    toggleSideBar(state) {
+      state.sideBar.open = !state.sideBar.open;
+    },
 
-          updateSideBarType(state, action) {
-            state.sideBar.type = action.payload.type;
-          },
-          openSnackBar(state, action) {
-            console.log(action.payload);
-            state.snackbar.open = true;
-            state.snackbar.severity = action.payload.severity;
-            state.snackbar.message = action.payload.message;
-          },
-          closeSnackBar(state) {
-            console.log("This is getting executed");
-            state.snackbar.open = false;
-            state.snackbar.message = null;
-          },
-        }
+    updateSideBarType(state, action) {
+      state.sideBar.type = action.payload.type;
+    },
+    openSnackBar(state, action) {
+      console.log(action.payload);
+      state.snackbar.open = true;
+      state.snackbar.severity = action.payload.severity;
+      state.snackbar.message = action.payload.message;
+    },
+    closeSnackBar(state) {
+      console.log("This is getting executed");
+      state.snackbar.open = false;
+      state.snackbar.message = null;
+    },
+  }
 
 })
+
+export default slice.reducer;
 
 export const closeSnackBar = () => async (dispatch, getState) => {
   dispatch(slice.actions.closeSnackBar());
@@ -44,9 +54,9 @@ export const closeSnackBar = () => async (dispatch, getState) => {
 
 
 
-export const showSnackbar =
-  ({ severity, message }) =>
-  async (dispatch, getState) => {
+export function showSnackbar({ severity, message }) {
+
+  return async (dispatch, getState) => {
     dispatch(
       slice.actions.openSnackBar({
         message,
@@ -58,17 +68,16 @@ export const showSnackbar =
       dispatch(slice.actions.closeSnackBar());
     }, 4000);
   };
-
+}
 
 export function ToggleSidebar() {
-    return async (dispatch, getState) => {
-      dispatch(slice.actions.toggleSideBar());
-    };
-  }
-  export function UpdateSidebarType(type) {
-    return async (dispatch, getState) => {
-      dispatch(slice.actions.updateSideBarType({ type }));
-    };
-  }
-  
-export default slice.reducer;
+  return async (dispatch, getState) => {
+    dispatch(slice.actions.toggleSideBar());
+  };
+}
+export function UpdateSidebarType(type) {
+  return async (dispatch, getState) => {
+    dispatch(slice.actions.updateSideBarType({ type }));
+  };
+}
+
