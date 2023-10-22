@@ -28,6 +28,7 @@ const initialState = {
           signOut(state, action) {
             state.isLoggedIn = false;
             state.token = "";
+            state.isLoading=false;
             // state.user_id = null;
           },
     }
@@ -81,5 +82,12 @@ export function LoginUser(formValues) {
           console.log(error);
          
         });
+    };
+  }
+
+  export function LogoutUser() {
+    return async (dispatch, getState) => {
+      // window.localStorage.removeItem("user_id");
+      dispatch(slice.actions.signOut());
     };
   }

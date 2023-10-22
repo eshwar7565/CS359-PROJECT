@@ -16,6 +16,8 @@ import { useState } from "react";
 import { faker } from "@faker-js/faker";
 
 import { useNavigate } from "react-router-dom";
+import { LogoutUser } from "../../redux/slices/auth";
+import { useDispatch } from "react-redux";
 
 const getPath = (index) => {
   switch (index) {
@@ -36,21 +38,23 @@ const getPath = (index) => {
   }
 };
 
-const getMenuPath = (index) =>
-{
+const getMenuPath = (index) => {
 
   switch (index) {
     case 0:
-      return "/profile";  
+      return "/profile";
     case 1:
       return "/settings";
-    default :
+    case 2:
+      return "/Logout" ;
+    default : 
       break;
   }
 
 }
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const [selected, setSelected] = useState(0);
   const navigate = useNavigate();
@@ -59,14 +63,14 @@ const Sidebar = () => {
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-   
+
 
 
 
 
   };
 
- // 
+  // 
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -197,19 +201,21 @@ const Sidebar = () => {
           >
             <Stack spacing={1} p={1}>
 
-              {Profile_Menu.map((el,idx) => (
-                <MenuItem onClick={ () =>{
-                  handleClick();
-                 
-                } }>
-                  <Stack 
-                  onClick = {() => {
-                    navigate(getMenuPath(idx));
-                  }}
-                  sx={{
-                    width: 100,
+              {Profile_Menu.map((el, idx) => (
+                <MenuItem onClick={handleClose}>
+                  <Stack
+                    onClick={() => {
+                      if (idx === 2) {
+                        dispatch(LogoutUser());
+                      }
+                      else {
+                        navigate(getMenuPath(idx));
+                      }
+                    }}
+                    sx={{
+                      width: 100,
 
-                  }} direction={"row"} alignItems={"center"}
+                    }} direction={"row"} alignItems={"center"}
                     justifyContent="space-between">
                     <span>{el.title}</span>{el.icon}
                   </Stack></MenuItem>
