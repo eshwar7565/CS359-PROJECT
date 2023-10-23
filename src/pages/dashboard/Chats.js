@@ -3,7 +3,7 @@ import { Avatar, Box, Button, Divider, IconButton, Stack, Typography } from '@mu
 import { ArchiveBox, CircleDashed, MagnifyingGlass, Users } from 'phosphor-react';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
-import { SimpleBarStyle } from '../../components/Scrollbar';
+// import { SimpleBarStyle } from '../../components/Scrollbar';
 import { useTheme } from "@mui/material/styles";
 
 import {
@@ -13,6 +13,8 @@ import {
 } from "../../components/Search";
 import { faker } from '@faker-js/faker';
 import { ChatList } from '../../data';
+import { useState } from 'react';
+import Friends from '../../sections/main/Friends';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -108,92 +110,107 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
 
 const Chats = () => {
     const theme = useTheme();
+    const [openDialog, setOpenDialog] = useState(false);
 
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    };
     return (
-        <Box
-            sx={{
-                position: "relative",
-                height: "100%",
-                width: 320,
-                backgroundColor:
-                    theme.palette.mode === "light"
-                        ? "#F8FAFF"
-                        : theme.palette.background,
+        <>
+            <Box
+                sx={{
+                    position: "relative",
+                    height: "100%",
+                    width: 320,
+                    backgroundColor:
+                        theme.palette.mode === "light"
+                            ? "#F8FAFF"
+                            : theme.palette.background,
 
-                boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
-            }}
-        >
-            <Stack p={3} spacing={2} sx={{ height: "100vh", }}>
-                <Stack direction="row" alignItems={"center"} justifyContent={"space-between"}>
-                    <Typography variant='h5'>
-                        Chats
-                    </Typography>
-
-                    <Stack direction="row"
-                    alignItems="center" 
-                    spacing={1}>
-                    <IconButton onClick={
-                        (
-                            {
-                                
-                            }
-                        )
-                    }>
-                        <Users/>
-                    </IconButton>
-                    <IconButton>
-                        <CircleDashed>
-                        </CircleDashed>
-                    </IconButton>
-                    </Stack>
-                    
-
-
-                </Stack>
-                <Stack sx={{ width: "100%" }}>
-                    <Search>
-                        <SearchIconWrapper>
-                            <MagnifyingGlass color="#709CE6" />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ "aria-label": "search" }}
-                        />
-                    </Search>
-                </Stack>
-                <Stack spacing={1}>
-                    <Stack direction={"row"} spacing={1.5} alignItems="center">
-                        <ArchiveBox size={24} />
-                        <Button variant="text">Archive</Button>
-                    </Stack>
-                    <Divider />
-                </Stack>
-                <Stack sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}>
-
-                    <Stack spacing={2.4}>
-                        <Typography variant="subtitle2" sx={{ color: "#676667" }}>
-                            Pinned
+                    boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
+                }}
+            >
+                <Stack p={3} spacing={2} sx={{ height: "100vh", }}>
+                    <Stack direction="row" alignItems={"center"} justifyContent={"space-between"}>
+                        <Typography variant='h5'>
+                            Chats
                         </Typography>
 
-                        {ChatList.filter((el) => el.pinned).map((el, idx) => {
-                            return <ChatElement {...el} />;
-                        })}
-                        <Typography variant="subtitle2" sx={{ color: "#676667" }}>
-                            All Chats
-                        </Typography>
-                        {/* Chat List */}
-                        {ChatList.filter((el) => !el.pinned).map((el, idx) => {
-                            return <ChatElement {...el} />;
-                          })}
+                        <Stack direction="row"
+                            alignItems="center"
+                            spacing={1}>
+                            <IconButton onClick={
+                                () => {
+                                    handleOpenDialog();
+                                }
+
+                            }>
+                                <Users />
+                            </IconButton>
+                            <IconButton>
+                                <CircleDashed>
+                                </CircleDashed>
+                            </IconButton>
+                        </Stack>
+
+
+
+                    </Stack>
+                    <Stack sx={{ width: "100%" }}>
+                        <Search>
+                            <SearchIconWrapper>
+                                <MagnifyingGlass color="#709CE6" />
+                            </SearchIconWrapper>
+                            <StyledInputBase
+                                placeholder="Search…"
+                                inputProps={{ "aria-label": "search" }}
+                            />
+                        </Search>
+                    </Stack>
+                    <Stack spacing={1}>
+                        <Stack direction={"row"} spacing={1.5} alignItems="center">
+                            <ArchiveBox size={24} />
+                            <Button variant="text">Archive</Button>
+                        </Stack>
+                        <Divider />
+                    </Stack>
+                    <Stack sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}>
+
+                        <Stack spacing={2.4}>
+                            <Typography variant="subtitle2" sx={{ color: "#676667" }}>
+                                Pinned
+                            </Typography>
+
+                            {ChatList.filter((el) => el.pinned).map((el, idx) => {
+                                return <ChatElement {...el} />;
+                            })}
+                            <Typography variant="subtitle2" sx={{ color: "#676667" }}>
+                                All Chats
+                            </Typography>
+                            {/* Chat List */}
+                            {ChatList.filter((el) => !el.pinned).map((el, idx) => {
+                                return <ChatElement {...el} />;
+                            })}
+
+                        </Stack>
+
 
                     </Stack>
 
-
                 </Stack>
 
-            </Stack>
+            </Box>
 
-        </Box>
+            {openDialog && (
+                <Friends open={openDialog} handleClose={handleCloseDialog} />
+            )}
+        </>
+
+
+
     );
 };
 
