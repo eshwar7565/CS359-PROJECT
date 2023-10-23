@@ -15,6 +15,8 @@ import { faker } from '@faker-js/faker';
 import { ChatList } from '../../data';
 import { useState } from 'react';
 import Friends from '../../sections/main/Friends';
+import { useDispatch } from 'react-redux';
+import { SelectConversation } from '../../redux/slices/app';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -51,8 +53,17 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
     const theme = useTheme();
+    const dispatch =useDispatch();
+     
     return (
-        <Box sx={{
+        <Box 
+        
+        onClick={()=>{
+                dispatch(SelectConversation({ room_id : id}));
+
+        }}
+        
+        sx={{
             width: "100%",
             backgroundColor:
                 theme.palette.mode === "light"

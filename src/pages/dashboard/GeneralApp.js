@@ -1,5 +1,9 @@
 import React from "react";
-import { Stack, Box } from "@mui/material";
+import { Stack, Box,Typography } from "@mui/material";
+
+import { Link } from "react-router-dom";
+import NoChat from "../../assets/Illustration/NoChat";
+
 import { useTheme } from "@mui/material/styles"
 import Chats from './Chats.js';
 import Conversation from "../../components/Conversation/index.js";
@@ -10,10 +14,14 @@ import StarredMessages from "../../components/StarredMessages.js";
 const GeneralApp = () => {
 
   const theme = useTheme();
-  const { sideBar } = useSelector((state) => state.app);
+  const { sideBar , room_id ,chat_type } = useSelector((state) => state.app);
 
+  
   return (
     <Stack direction="row" sx={{ width: "100%" }}>
+    {
+      /* Chats*/
+    }
       <Chats />
       <Box
         sx={{
@@ -30,7 +38,31 @@ const GeneralApp = () => {
         {
           // Conversation
         }
-        <Conversation />
+        {room_id!=null && chat_type === "individual" ?
+        <Conversation /> :
+        <Stack
+        spacing={2}
+        sx={{ height: "100%", width: "100%" }}
+        alignItems="center"
+        justifyContent={"center"}
+        >
+
+        <NoChat />
+              <Typography variant="subtitle2">
+                Select a conversation or start a{" "}
+                <Link
+                  style={{
+                    color: theme.palette.primary.main,
+                    textDecoration: "none",
+                  }}
+                  to="/"
+                >
+                  new one
+                </Link>
+              </Typography>
+        </Stack>
+
+      }
 
       </Box>
 
