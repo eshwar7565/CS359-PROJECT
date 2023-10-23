@@ -126,4 +126,4 @@ const Friends = ({ open, handleClose }) => {
     )
 }
 
-export default Friends
+export default Friends;
