@@ -10,7 +10,7 @@ import {
     FetchUsers,
   } from "../../redux/slices/app";
 
-  import { FriendElement, FriendRequestElement, UserElement } from "../../components/UserElement";
+  import { FriendElement, FriendRequestElement, UserElement } from "../../components/Friends";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;

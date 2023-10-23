@@ -27,7 +27,7 @@ const DashboardLayout = () => {
         }
       }
 
-      window.reload();
+     
 
       if(!socket)
       {
@@ -36,18 +36,18 @@ const DashboardLayout = () => {
 
       // new friend request 
 
-      socket.on("new_friend-request" , () => 
+      socket.on("new_friend-request" , (data) => 
       {
         dispatch(showSnackbar({severity :"success" , message : data.message})) ;
       })
 
       //request accepted
-      socket.on("request_accepted" , () => 
+      socket.on("request_accepted" , (data) => 
       {
         dispatch(showSnackbar({severity :"success" , message : data.message})) ;
       })
 
-      socket.on("request_sent" , () => 
+      socket.on("request_sent" , (data) => 
       {
         dispatch(showSnackbar({severity :"success" , message : data.message})) ;
       })
