@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Avatar, Box, Button, Divider, IconButton, Stack, Typography } from '@mui/material';
 import { ArchiveBox, CircleDashed, MagnifyingGlass, Users } from 'phosphor-react';
 import { styled } from '@mui/material/styles';
@@ -15,8 +15,12 @@ import { faker } from '@faker-js/faker';
 import { ChatList } from '../../data';
 import { useState } from 'react';
 import Friends from '../../sections/main/Friends';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SelectConversation } from '../../redux/slices/app';
+import { socket } from '../../socket';
+import { FetchDirectConversations } from '../../redux/slices/conversation';
+
+const user_id = window.localStorage.getItem("user_id");
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -123,12 +127,25 @@ const Chats = () => {
     const theme = useTheme();
     const [openDialog, setOpenDialog] = useState(false);
 
+    const dispatch = useDispatch();
+
+    const {conversations} = useSelector((state) => state.conversation.direct_chat);
+
     const handleCloseDialog = () => {
         setOpenDialog(false);
     };
     const handleOpenDialog = () => {
         setOpenDialog(true);
     };
+
+    useEffect(() => {
+        socket.emit("get_direct_conversations", { user_id }, (data) => {
+          console.log(data); // this data is the list of conversations
+          // dispatch action
+    
+          dispatch(FetchDirectConversations({ conversations: data }));
+        });
+      }, []);
     return (
         <>
             <Box
@@ -191,18 +208,19 @@ const Chats = () => {
                     <Stack sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}>
 
                         <Stack spacing={2.4}>
-                            <Typography variant="subtitle2" sx={{ color: "#676667" }}>
+                           { /*<Typography variant="subtitle2" sx={{ color: "#676667" }}>
                                 Pinned
                             </Typography>
 
                             {ChatList.filter((el) => el.pinned).map((el, idx) => {
                                 return <ChatElement {...el} />;
-                            })}
+                            })} */
+                        }
                             <Typography variant="subtitle2" sx={{ color: "#676667" }}>
                                 All Chats
                             </Typography>
                             {/* Chat List */}
-                            {ChatList.filter((el) => !el.pinned).map((el, idx) => {
+                            {conversations.filter((el) => !el.pinned).map((el, idx) => {
                                 return <ChatElement {...el} />;
                             })}
 
