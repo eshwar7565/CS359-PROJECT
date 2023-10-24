@@ -2,10 +2,11 @@ import React from "react";
 import { Navigate,Outlet } from "react-router-dom";
 import { Stack } from "@mui/material";
 import  Sidebar  from "./Sidebar";
-import {  connect, useDispatch, useSelector } from "react-redux";
+import {   useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { connectSocket, socket } from "../../socket";
 import { showSnackbar } from "../../redux/slices/app";
+
 const DashboardLayout = () => {
 
   const { isLoggedIn } = useSelector((state) => state.auth);

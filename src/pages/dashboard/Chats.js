@@ -12,7 +12,7 @@ import {
     StyledInputBase,
 } from "../../components/Search";
 import { faker } from '@faker-js/faker';
-import { ChatList } from '../../data';
+
 import { useState } from 'react';
 import Friends from '../../sections/main/Friends';
 import { useDispatch, useSelector } from 'react-redux';
