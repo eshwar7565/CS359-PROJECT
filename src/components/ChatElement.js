@@ -57,10 +57,10 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
                     {online ? <StyledBadge overlap='circular'
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                         variant="dot">
-                        <Avatar src={faker.image.avatar()} />
+                        <Avatar />
                     </StyledBadge>
                         :
-                        <Avatar src={faker.image.avatar()} />
+                        <Avatar />
                     }
 
 

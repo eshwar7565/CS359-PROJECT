@@ -89,10 +89,10 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
                     {online ? <StyledBadge overlap='circular'
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                         variant="dot">
-                        <Avatar src={faker.image.avatar()} />
+                        <Avatar  />
                     </StyledBadge>
                         :
-                        <Avatar src={faker.image.avatar()} />
+                        <Avatar />
                     }
 
 
@@ -103,9 +103,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
                             {msg}</Typography>
                     </Stack>
                     <Stack alignItems="center" spacing={2}>
-                        <Typography>
-                            {time}
-                        </Typography>
+                     
                         <Badge color="primary" badgeContent={unread}>
                         </Badge>
                     </Stack>
