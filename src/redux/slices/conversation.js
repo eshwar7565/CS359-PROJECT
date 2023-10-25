@@ -24,8 +24,8 @@ const slice = createSlice({
                 return {
                     id: el._id,
                     user_id: user?._id,
-                    name: '${user?.firstName} ${user?.lastName}',
-                    online: user?.status === "Online",
+                    name: user?.firstName ,
+                  
                     img: faker.image.avatar(),
                     msg: faker.music.songName(),
                     time: "9:36",

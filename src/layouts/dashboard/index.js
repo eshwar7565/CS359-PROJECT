@@ -35,6 +35,11 @@ const DashboardLayout = () => {
         connectSocket(user_id);
       }
 
+      socket.on("start_chat", (data) => 
+        {
+
+        });
+
       // new friend request 
 
       socket.on("new_friend-request" , (data) => 
@@ -61,10 +66,10 @@ const DashboardLayout = () => {
       socket.off("new_friend_request");
       socket.off("request_accepted");
       socket.off("request_sent");
-
+      socket?.off("start_chat");
     }
 
-  },[isLoggedIn,socket]) ;
+  },) ;
 
 
   if (!isLoggedIn) {

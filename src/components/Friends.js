@@ -1,5 +1,5 @@
 import React from "react";
-
+// import { faker } from '@faker-js/faker';
 import {
     Box,
     Badge,
@@ -170,12 +170,12 @@ const FriendRequestElement = ({
   
 
   const FriendElement = ({
-    img,
+    // img, 
     firstName,
     lastName,
     incoming,
     missed,
-    online,
+    // online,
     _id,
   }) => {
     const theme = useTheme();
@@ -200,17 +200,9 @@ const FriendRequestElement = ({
         >
           <Stack direction="row" alignItems={"center"} spacing={2}>
             {" "}
-            {online ? (
-              <StyledBadge
-                overlap="circular"
-                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                variant="dot"
-              >
-                <Avatar alt={name} src={img} />
-              </StyledBadge>
-            ) : (
-              <Avatar alt={name} src={img} />
-            )}
+           
+              <Avatar alt={name}  />
+           
             <Stack spacing={0.3}>
               <Typography variant="subtitle2">{name}</Typography>
             </Stack>
