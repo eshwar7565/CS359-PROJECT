@@ -5,7 +5,8 @@ import  Sidebar  from "./Sidebar";
 import {   useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { connectSocket, socket } from "../../socket";
-import { showSnackbar } from "../../redux/slices/app";
+import { SelectConversation, showSnackbar } from "../../redux/slices/app";
+import { AddDirectConversation, UpdateDirectConversation } from "../../redux/slices/conversation";
 
 const DashboardLayout = () => {
 
@@ -13,6 +14,9 @@ const DashboardLayout = () => {
 
   const user_id = window.localStorage.getItem("user_id");
 
+  const { conversations, current_conversation } = useSelector(
+    (state) => state.conversation.direct_chat
+  );
   const dispatch = useDispatch();
   useEffect(()=>
   {
@@ -37,7 +41,19 @@ const DashboardLayout = () => {
 
       socket.on("start_chat", (data) => 
         {
-
+          console.log(data);
+           // add / update to conversation list
+          const existing_conversation = conversations.find(
+            (el) => el?.id === data._id
+          );
+          if (existing_conversation) {
+            // update direct conversation
+            dispatch(UpdateDirectConversation({ conversation: data }));
+          } else {
+            // add direct conversation
+            dispatch(AddDirectConversation({ conversation: data }));
+          }
+          dispatch(SelectConversation({ room_id: data._id }));
         });
 
       // new friend request 
