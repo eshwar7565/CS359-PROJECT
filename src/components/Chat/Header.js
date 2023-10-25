@@ -125,11 +125,7 @@ const ChatHeader = () => {
           <IconButton>
             <Phone />
           </IconButton>
-          {!isMobile && (
-            <IconButton>
-              <MagnifyingGlass />
-            </IconButton>
-          )}
+          
 
           <Divider orientation="vertical" flexItem />
           <IconButton

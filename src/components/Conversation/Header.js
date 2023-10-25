@@ -42,9 +42,10 @@ const Header = () => {
                 }}
             >
 
-                <Stack  onClick={() => {
-                    dispatch(ToggleSidebar());
-                  }}
+                <Stack  
+                // onClick={() => {
+                //     dispatch(ToggleSidebar());
+                //   }}
                     spacing={2}
                     direction="row"
                 >
@@ -86,15 +87,9 @@ const Header = () => {
                         <Phone>
                         </Phone>
                     </IconButton>
-                    <IconButton>
-                        <MagnifyingGlass>
-                        </MagnifyingGlass>
-                    </IconButton>
-                    <Divider orientation='vertical' flexItem />
-                    <IconButton>
-                        <CaretDown></CaretDown>
-
-                    </IconButton>
+                
+                   
+                
 
                 </Stack>
 
