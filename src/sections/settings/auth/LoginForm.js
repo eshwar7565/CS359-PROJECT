@@ -33,8 +33,8 @@ const LoginForm = () => {
         password: Yup.string().required("Password is required"),
     });
     const defaultValues = {
-        email: "codingmonk@gmail.com",
-        password: "1234567",
+        email: "",
+        password: "",
     };
     const methods = useForm({
         resolver: yupResolver(LoginSchema),

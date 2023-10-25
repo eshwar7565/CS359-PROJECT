@@ -36,7 +36,7 @@ const Register = () => {
                 </Link>
                 .
             </Typography>
-            <AuthSocial></AuthSocial>
+           
         </>
     )
 
