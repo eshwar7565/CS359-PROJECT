@@ -123,7 +123,7 @@ export function LoginUser(formValues) {
 
 export function LogoutUser() {
   return async (dispatch, getState) => {
-    window.localStorage.removeItem("user_id");
+    window.localStorage.clear();
     dispatch(slice.actions.signOut());
   };
 }

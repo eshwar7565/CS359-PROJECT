@@ -11,13 +11,16 @@ import { useTheme } from "@mui/material/styles";
 import StyledBadge from '../Styledbadge';
 import { faker } from "@faker-js/faker";
 import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from 'phosphor-react';
-// import { dispatch } from '../../redux/store';
+
 import { ToggleSidebar } from '../../redux/slices/app';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 const Header = () => {
     const theme = useTheme();
     const dispatch =useDispatch();
 
+    const {current_conversation} = useSelector((state) => state.conversation.direct_chat);
+    
+    console.log( current_conversation?.name ); 
     return (
         <Box
             p={2}
@@ -56,14 +59,16 @@ const Header = () => {
                         >
                             <Avatar
 
-                                src={faker.image.avatar()}
+                             
                             />
                         </StyledBadge>
 
                     </Box>
                     <Stack spacing={0.2}>
-                        <Typography variant='subtitle2'>
-                            {faker.name.fullName()}
+                        <Typography variant="subtitle2">
+
+                        
+                          {current_conversation?.name}
                         </Typography>
                         <Typography variant='caption' >
                             Online

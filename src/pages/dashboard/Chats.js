@@ -18,7 +18,7 @@ import Friends from '../../sections/main/Friends';
 import { useDispatch, useSelector } from 'react-redux';
 import { SelectConversation } from '../../redux/slices/app';
 import { socket } from '../../socket';
-import { FetchDirectConversations } from '../../redux/slices/conversation';
+import { FetchDirectConversations, SetCurrentConversation } from '../../redux/slices/conversation';
 
 const user_id = window.localStorage.getItem("user_id");
 
@@ -63,7 +63,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
         <Box 
         
         onClick={()=>{
-                dispatch(SelectConversation({ room_id : id}));
+                dispatch(SetCurrentConversation({ room_id : id , name : name }));
 
         }}
         
