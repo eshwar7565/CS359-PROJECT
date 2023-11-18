@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { faker } from "@faker-js/faker";
+
 
 const user_id = window.localStorage.getItem("user_id");
 
@@ -25,10 +25,10 @@ const slice = createSlice({
                     id: el._id,
                     user_id: user?._id,
                     name: user?.firstName ,
-                    // online: user?.status === "Online",
+                    online: user?.status === "Online",
                     // img: faker.image.avatar(),
                     msg: el.messages.slice(-1)[0].text, 
-                    time: "9:36",
+                    // time: "9:36",
                     unread: 0,
                     pinned: false,
                     about: user?.about,
@@ -99,6 +99,9 @@ const slice = createSlice({
             }));
             state.direct_chat.current_messages = formatted_messages;
           },
+          addDirectMessage(state, action) {
+            state.direct_chat.current_messages.push(action.payload.message);
+          }
 
 
     }
@@ -140,5 +143,10 @@ export const FetchDirectConversations = ({ conversations }) => {
   export const FetchCurrentMessages = ({messages}) => {
     return async(dispatch, getState) => {
       dispatch(slice.actions.fetchCurrentMessages({messages}));
+    }
+  }
+  export const AddDirectMessage = (message) => {
+    return async (dispatch, getState) => {
+      dispatch(slice.actions.addDirectMessage({message}));
     }
   }

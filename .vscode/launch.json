@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "//wsl.localhost/Ubuntu/home/eshwar/os",
-      "program": "//wsl.localhost/Ubuntu/home/eshwar/os/build/Debug/outDebug",
+      "cwd": "//wsl.localhost/Ubuntu/home/eshwar/cn",
+      "program": "//wsl.localhost/Ubuntu/home/eshwar/cn/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

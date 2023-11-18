@@ -1,7 +1,18 @@
 import React from "react";
 import { Box, Badge, Stack, Avatar, Typography } from "@mui/material";
-import { faker } from '@faker-js/faker';
-import { styled, useTheme} from "@mui/material/styles";
+import { styled, useTheme,alpha} from "@mui/material/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { SelectConversation } from "../redux/slices/app";
+
+const truncateText = (string, n) => {
+  return string?.length > n ? `${string?.slice(0, n)}...` : string;
+};
+
+const StyledChatBox = styled(Box)(({ theme }) => ({
+  "&:hover": {
+    cursor: "pointer",
+  },
+}));
 const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       backgroundColor: "#44b700",
@@ -32,28 +43,42 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   }));
   
 
-const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
-    const theme = useTheme();
+const ChatElement = ({  img,name, msg, time, unread, online ,id}) => {
+  const dispatch = useDispatch(); 
+  const {room_id} = useSelector((state) => state.app); 
+  const selectedChatId = room_id?.toString();
+  let isSelected = +selectedChatId === id;
+
+  if (!selectedChatId) {
+    isSelected = false;
+  }
+  const theme = useTheme();
     return (
-        <Box sx={{
-            width: "100%",
-            backgroundColor:
-            theme.palette.mode === "light"
-              ? "#F8FAFF"
-              : theme.palette.background,
-            borderRadius: 1,
-        
 
-
-        }}
-            p={2}>
+      <StyledChatBox
+      onClick={() => {
+        dispatch(SelectConversation({room_id: id}));
+      }}
+      sx={{
+        width: "100%",
+        borderRadius: 1,
+        backgroundColor: isSelected
+          ? theme.palette.mode === "light"
+            ? alpha(theme.palette.primary.main, 0.5)
+            : theme.palette.primary.main
+          : theme.palette.mode === "light"
+          ? "#fff"
+          : theme.palette.background.paper,
+      }}
+      p={2}
+    >
             <Stack direction="row"
                 alignItems={"center"}
                 justifyContent="space-between"
 
             >
                 <Stack direction="row" spacing={2}>
-
+                {" "}
                     {online ? <StyledBadge overlap='circular'
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                         variant="dot">
@@ -68,7 +93,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
                         <Typography variant='subtitle2'>
                             {name}</Typography>
                         <Typography variant='subtitle2'>
-                            {msg}</Typography>
+                        {truncateText(msg, 20)}</Typography>
                     </Stack>
                     <Stack alignItems="center" spacing={2}>
                         <Typography>
@@ -83,7 +108,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
             </Stack>
 
 
-        </Box>
+        </StyledChatBox>
     )
 }
 

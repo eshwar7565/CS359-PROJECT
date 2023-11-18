@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 
 import { Box, Divider, IconButton, Stack, Avatar, Menu, MenuItem } from "@mui/material";
 import AntSwitch from "../../components/AntSwitch";
-
+import { socket } from "../../socket";
 import Logo from "../../assets/Images/logo.ico";
 
 import useSettings from "../../hooks/useSettings";
@@ -69,7 +69,7 @@ const Sidebar = () => {
 
 
   };
-
+  const user_id = window.localStorage.getItem("user_id");
   // 
   const handleClose = () => {
     setAnchorEl(null);
@@ -207,6 +207,7 @@ const Sidebar = () => {
                     onClick={() => {
                       if (idx === 2) {
                         dispatch(LogoutUser());
+                        socket.emit("end", {user_id});
                       }
                       else {
                         navigate(getMenuPath(idx));
