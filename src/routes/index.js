@@ -50,22 +50,23 @@ export default function Router() {
   ]);
 }
 
+
+// Pages section
 const GeneralApp = Loadable(lazy(() => import("../pages/dashboard/GeneralApp")),);
 const Conversation = Loadable(lazy(() => import("../pages/dashboard/Conversation")));
 const Chats = Loadable(lazy(() => import("../pages/dashboard/Chats")));
-const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")),);
-
-const RegisterPage =
- Loadable(lazy(() => import("../pages/auth/Register")));
- const ResetPassword =
- Loadable(lazy(() => import("../pages/auth/ResetPassword")));
-
- const NewPasswordPage = Loadable(
-  lazy(() => import("../pages/auth/NewPassword"))
-);
 const Group = Loadable(lazy(() => import("../pages/dashboard/Group")));
 const CallPage = Loadable(lazy(() => import("../pages/dashboard/Call")));
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));
+
+
+//Auth pages
+const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")),);
+const RegisterPage =Loadable(lazy(() => import("../pages/auth/Register")));
+const ResetPassword =Loadable(lazy(() => import("../pages/auth/ResetPassword")));
+const NewPasswordPage = Loadable(lazy(() => import("../pages/auth/NewPassword")));
+
+
 
 // Settings
 const Settings = Loadable(lazy(() => import("../pages/dashboard/Settings")),);
