@@ -24,10 +24,10 @@ import { useTheme } from "@mui/material/styles";
 import { faker } from "@faker-js/faker";
 import ThemeDialog from "../../sections/settings/settings/ThemeDialog";
 import ShortcutDialog from "../../sections/settings/settings/Shortcuts";
-
+import { useDispatch, useSelector } from "react-redux";
 const Settings = () => {
     const theme = useTheme();
-
+    const { user } = useSelector((state) => state.app);
     const [openTheme, setOpenTheme] = useState(false);
 
     const handleOpenTheme = () => {
@@ -131,12 +131,12 @@ const Settings = () => {
                         {/* Profile */}
                         <Stack direction="row" spacing={3}>
                             <Avatar
-                                src={faker.image.avatar()}
+                               
                                 sx={{ height: 56, width: 56 }}
                             />
                             <Stack spacing={0.5}>
-                                <Typography variant="article">{`${faker.name.firstName()} ${faker.name.lastName()}`}</Typography>
-                                <Typography variant="body2">{faker.random.words()}</Typography>
+                                <Typography variant="article">{`${user?.firstName} ${user?.lastName}`}</Typography>
+                                <Typography variant="body2">Mathematician</Typography>
                             </Stack>
                         </Stack>
                         {/* List */}
