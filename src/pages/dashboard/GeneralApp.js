@@ -16,7 +16,7 @@ const GeneralApp = () => {
   const theme = useTheme();
   const { sideBar , room_id ,chat_type } = useSelector((state) => state.app);
 
-  
+  const {current_conversation}=useSelector((state)=>state.conversation.direct_chat);
   return (
     <Stack direction="row" sx={{ width: "100%" }}>
     {
@@ -38,7 +38,7 @@ const GeneralApp = () => {
         {
           // Conversation
         }
-        {room_id!=null && chat_type === "individual" ?
+        {room_id!=null && chat_type === "individual" && current_conversation!=null ?
         <Conversation /> :
         <Stack
         spacing={2}
@@ -49,16 +49,8 @@ const GeneralApp = () => {
 
         <NoChat />
               <Typography variant="subtitle2">
-                Select a conversation or start a{" "}
-                <Link
-                  style={{
-                    color: theme.palette.primary.main,
-                    textDecoration: "none",
-                  }}
-                  to="/"
-                >
-                  new one
-                </Link>
+                Select a conversation or start a new one
+               
               </Typography>
         </Stack>
 
