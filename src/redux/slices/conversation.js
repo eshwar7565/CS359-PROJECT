@@ -102,14 +102,8 @@ const slice = createSlice({
           addDirectMessage(state, action) {
             state.direct_chat.current_messages.push(action.payload.message);
           }
-
-
     }
-
 });
-
-
-
 // Reducer
 export default slice.reducer;
 
