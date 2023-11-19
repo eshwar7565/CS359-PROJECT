@@ -24,7 +24,7 @@ const slice = createSlice({
     logIn(state, action) {
       state.isLoggedIn = action.payload.isLoggedIn;
       state.token = action.payload.token;
-      // state.user_id = action.payload.user_id;
+      state.user_id = action.payload.user_id;
     },
     signOut(state, action) {
       state.isLoggedIn = false;
@@ -110,9 +110,9 @@ export function LoginUser(formValues) {
         dispatch(
           showSnackbar({ severity: "success", message: response.data.message })
         );
-        // dispatch(
-        //   slice.actions.updateIsLoading({ isLoading: false, error: false })
-        // );
+        dispatch(
+          slice.actions.updateIsLoading({ isLoading: false, error: false })
+        );
       })
       .catch(function (error) {
         console.log(error);

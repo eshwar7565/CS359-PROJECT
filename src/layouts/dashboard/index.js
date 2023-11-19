@@ -17,9 +17,9 @@ import {AddDirectMessage, AddDirectConversation, UpdateDirectConversation } from
 const DashboardLayout = () => {
 
   const dispatch = useDispatch();
-  const { isLoggedIn } = useSelector((state) => state.auth);
+ 
   const {user_id} = useSelector((state) => state.auth);
-
+const isLoggedIn =true;
 
   // TO DO audio and video calls 
  

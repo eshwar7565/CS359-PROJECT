@@ -10,6 +10,9 @@ import {
 } from "phosphor-react";
 
 
+
+
+
 const Profile_Menu = [
   {
     title: "Profile",
@@ -22,6 +25,28 @@ const Profile_Menu = [
   {
     title: "LogOut",
     icon: <SignOut />,
+  },
+];
+
+const Nav_Buttons = [
+  {
+    index: 0,
+    icon: <ChatCircleDots />,
+  },
+  {
+    index: 1,
+    icon: <Users />,
+  },
+  {
+    index: 2,
+    icon: <Phone />,
+  },
+];
+
+const Nav_Settings = [
+  {
+    index: 3,
+    icon: <GearSix />,
   },
 ];
 
@@ -156,27 +181,7 @@ const CallList = [
   },
 ];
 
-const Nav_Buttons = [
-  {
-    index: 0,
-    icon: <ChatCircleDots />,
-  },
-  {
-    index: 1,
-    icon: <Users />,
-  },
-  {
-    index: 2,
-    icon: <Phone />,
-  },
-];
 
-const Nav_Setting = [
-  {
-    index: 3,
-    icon: <GearSix />,
-  },
-];
 
 const ChatList = [
   {
@@ -466,7 +471,7 @@ const Shared_links = [
 
 export {
   Profile_Menu,
-  Nav_Setting,
+  Nav_Settings,
   Nav_Buttons,
   ChatList,
   Chat_History,

@@ -10,6 +10,8 @@ const initialState = {
     type: "CONTACT", // can be CONTACT, STARRED, SHARED
   },
 
+  isLoggedIn: true,
+  tab: 0, // [0, 1, 2, 3]
   snackbar: {
     open: 0,
     severity: null,
@@ -32,6 +34,13 @@ const slice = createSlice({
   initialState,
 
   reducers: {
+    fetchUser(state, action) {
+      state.user = action.payload.user;
+    },
+    updateUser(state, action) {
+      state.user = action.payload.user;
+    },
+
     toggleSideBar(state) {
       state.sideBar.open = !state.sideBar.open;
     },
@@ -39,6 +48,10 @@ const slice = createSlice({
     updateSideBarType(state, action) {
       state.sideBar.type = action.payload.type;
     },
+    updateTab(state, action) {
+      state.tab = action.payload.tab;
+    },
+
     openSnackBar(state, action) {
       console.log(action.payload);
       state.snackbar.open = true;
@@ -111,6 +124,12 @@ export function ToggleSidebar() {
 export function UpdateSidebarType(type) {
   return async (dispatch, getState) => {
     dispatch(slice.actions.updateSideBarType({ type }));
+  };
+}
+
+export function UpdateTab(tab) {
+  return async (dispatch, getState) => {
+    dispatch(slice.actions.updateTab(tab));
   };
 }
 
