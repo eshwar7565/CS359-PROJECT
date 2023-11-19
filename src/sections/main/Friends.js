@@ -19,21 +19,9 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-
- 
-
-
- 
-
-
-
 const Friends = ({ open, handleClose }) => {
     const [value, setValue] = React.useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    const handleChange = (event, newValue) => {setValue(newValue);};
 
     return (
         <Dialog
@@ -46,25 +34,18 @@ const Friends = ({ open, handleClose }) => {
             aria-describedby="alert-dialog-slide-description"
             sx={{ p: 4 }}
         >
-
             <Stack p={2} sx={{ width: "100%" }}>
                 <Tabs value={value} onChange={handleChange} centered>
-                 
-                    <Tab label="Friends" />
-              
+                    <Tab label="Friends" />          
                 </Tabs>
             </Stack>
 
             <DialogContent>
                 <Stack sx={{ height: "100%" }}>
                     <Stack spacing={2.4}>
-                        {(() => {
-                            
-
+                        {(() => { 
                                 // case 1: // display friends in this list
                                     return <FriendsList />;
-
-                          
                         })()}
                     </Stack>
                 </Stack>
@@ -72,10 +53,7 @@ const Friends = ({ open, handleClose }) => {
         </Dialog>
     )
 }
-
 export default Friends;
-
-
 const FriendsList = () => {
   const dispatch = useDispatch();
 
