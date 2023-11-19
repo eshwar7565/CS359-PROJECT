@@ -219,17 +219,14 @@ const Footer = () => {
                 position: "fixed",
                 display: openPicker ? "inline" : "none",
                 bottom: 81,
-                right: isMobile
-                  ? 20
-                  : searchParams.get("open") === "true"
-                    ? 420
-                    : 100,
               }}
             >
               <Picker
                 theme={theme.palette.mode}
                 data={data}
-                onEmojiSelect={console.log}
+                onEmojiSelect={(emoji) => {
+                  handleEmojiClick(emoji.native);
+                }}
               />
             </Box>
             {/* Chat Input */}

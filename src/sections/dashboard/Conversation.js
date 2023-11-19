@@ -13,7 +13,7 @@ import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
 import { Message_options } from "../../data";
 import { Link } from "react-router-dom";
 import truncateString from "../../utils/truncate";
-import { LinkPreview } from "@dhaiwat10/react-link-preview";
+// import { LinkPreview } from "@dhaiwat10/react-link-preview";
 import Embed from "react-embed";
 
 const MessageOption = () => {
