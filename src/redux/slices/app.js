@@ -4,7 +4,7 @@ import axios from "../../utils/axios";
 
 
 const initialState = {
-
+user:{},
   sideBar: {
     open: false,
     type: "CONTACT", // can be CONTACT, STARRED, SHARED
@@ -231,3 +231,53 @@ export const SelectConversation = ({ room_id }) => {
     dispatch(slice.actions.selectConversation({ room_id }));
   };
 };
+
+export const FetchUserProfile = () => {
+  return async (dispatch, getState) => {
+    axios
+      .get("/user/get-me", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getState().auth.token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        dispatch(slice.actions.fetchUser({ user: response.data.data }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const UpdateUserProfile = (formValues) => {
+  return async (dispatch, getState) => {
+    // Assuming your server API endpoint for updating the user profile is /update-profile
+    const apiUrl = '/user/update-me';
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      if (response.ok) {
+        // If needed, dispatch an action to handle a successful update
+        // dispatch(updateUserProfileSuccessAction());
+      } else {
+        // If the update fails, you might want to handle the error
+        console.error('Update failed:', response.statusText);
+        // dispatch(updateUserProfileFailureAction(response.statusText));
+      }
+    } catch (error) {
+      // Handle network or other errors
+      console.error('Update error:', error);
+      // dispatch(updateUserProfileFailureAction('Failed to update profile'));
+    }
+  };
+};
+

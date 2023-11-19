@@ -8,23 +8,24 @@ import RHFTextField from "../../../components/hook-form/RHFTextFiled";
 import { Stack } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useDispatch, useSelector } from "react-redux";
-// import { UpdateUserProfile } from "../../../redux/slices/app";
+import { UpdateUserProfile } from "../../../redux/slices/app";
 // import { AWS_S3_REGION, S3_BUCKET_NAME } from "../../../config";
 
 const ProfileForm = () => {
       const dispatch = useDispatch();
       const [file, setFile] = useState();
-    //   const { user } = useSelector((state) => state.app);
+      const { user } = useSelector((state) => state.app);
+      console.log(user);
 
     const ProfileSchema = Yup.object().shape({
         firstName: Yup.string().required("Name is required"),
         about: Yup.string().required("About is required"),
-        avatar: Yup.string().required("Avatar is required").nullable(true),
+        // avatar: Yup.string().required("Avatar is required").nullable(true),
     });
 
     const defaultValues = {
-        firstName: "",
-        about: "",
+        firstName: user?.firstName,
+        about: user?.about,
         // avatar: `https://${S3_BUCKET_NAME}.s3.${AWS_S3_REGION}.amazonaws.com/${user?.avatar},
     };
 
@@ -48,13 +49,13 @@ const ProfileForm = () => {
         try {
             //   Send API request
             console.log("DATA", data);
-            // dispatch(
-            //     UpdateUserProfile({
-            //         firstName: data?.firstName,
-            //         about: data?.about,
-            //         avatar: file,
-            //     })
-            // );
+            dispatch(
+                UpdateUserProfile({
+                    firstName: data?.firstName,
+                    about: data?.about,
+                    // avatar: file,
+                })
+            );
         } catch (error) {
             console.error(error);
         }
