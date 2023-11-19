@@ -7,10 +7,10 @@ const initialState = {
   isLoggedIn: false,
   token: "",
   isLoading: false,
-  // user: null,
-  // user_id: null,
-  // email: "",
-  // error: false,
+  user: null,
+  user_id: null,
+  email: "",
+  error: false,
 };
 
 const slice = createSlice({
@@ -30,7 +30,7 @@ const slice = createSlice({
       state.isLoggedIn = false;
       state.token = "";
       state.isLoading = false;
-      // state.user_id = null;
+      state.user_id = null;
     },
   }
 
