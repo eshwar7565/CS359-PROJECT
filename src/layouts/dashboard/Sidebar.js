@@ -1,6 +1,6 @@
 import React from "react";
 import { useTheme } from "@mui/material/styles";
-import { Box, Divider, IconButton, Stack} from "@mui/material";
+import { Box, Divider, IconButton, Stack } from "@mui/material";
 import AntSwitch from "../../components/AntSwitch";
 import Logo from "../../assets/Images/logo.ico";
 import useSettings from "../../hooks/useSettings";
@@ -9,9 +9,9 @@ import ProfileMenu from "./ProfileMenu";
 
 
 import { useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { UpdateTab } from "../../redux/slices/app"; 
+import { UpdateTab } from "../../redux/slices/app";
 
 const getPath = (index) => {
   switch (index) {
@@ -50,17 +50,17 @@ const Sidebar = () => {
       p={2}
       sx={{
         backgroundColor:
-        theme.palette.mode === "light"
-          ? "#F0F4FA"
-          : theme.palette.background.paper,
+          theme.palette.mode === "light"
+            ? "#F0F4FA"
+            : theme.palette.background.paper,
         boxShadow: "0px 0px 2px rgba(0, 0, 0 ,0.25)",
         height: "100vh", width: 100
       }}>
 
       <Stack
-      
-       alignItems={"center"} 
-       sx={{ height: "100%" }}
+
+        alignItems={"center"}
+        sx={{ height: "100%" }}
         py={3}
         justifyContent={"space-between"}>
         <Stack
@@ -77,43 +77,43 @@ const Sidebar = () => {
 
 
           <Stack direction="column"
-           alignItems={"center"}
+            alignItems={"center"}
             sx={{ width: "max-content" }} spacing={3}>
 
             {Nav_Buttons.map((el) => (
               el.index === selectedTab ? (
                 <Box
-                
+
                   sx={{
                     backgroundColor: theme.palette.primary.main,
                     borderRadius: 1.5,
                   }}>
                   <IconButton
-                  onClick={() => {
-                    handleChangeTab(el.index);
-                  }}
-                  sx={{ width: "max-content", color: "#ffffff" }}
+                    onClick={() => {
+                      handleChangeTab(el.index);
+                    }}
+                    sx={{ width: "max-content", color: "#ffffff" }}
                   >
                     {el.icon}
                   </IconButton>
                 </Box>
-              ):(
+              ) : (
 
-               
-                  <IconButton
-                    onClick={() => {
-                      handleChangeTab(el.index);
-                    }}
-                    sx={{
-                      width: "max-content",
-                      color:
-                        theme.palette.mode === "light"
-                          ? "#080707"
-                          : theme.palette.text.primary,
-                    }}
-                   >
-                    {el.icon}
-                  </IconButton>
+
+                <IconButton
+                  onClick={() => {
+                    handleChangeTab(el.index);
+                  }}
+                  sx={{
+                    width: "max-content",
+                    color:
+                      theme.palette.mode === "light"
+                        ? "#080707"
+                        : theme.palette.text.primary,
+                  }}
+                >
+                  {el.icon}
+                </IconButton>
               )
 
             ))}
@@ -141,7 +141,7 @@ const Sidebar = () => {
                   onClick={() => {
                     handleChangeTab(el.index);
 
-                   
+
                   }}
                   sx={{
                     width: "max-content",
@@ -162,8 +162,8 @@ const Sidebar = () => {
 
         <Stack spacing={4}>
           <AntSwitch
-          defaultChecked={theme.palette.mode === "dark"}
-           onChange={onToggleMode}>
+            defaultChecked={theme.palette.mode === "dark"}
+            onChange={onToggleMode}>
 
           </AntSwitch>
           <ProfileMenu />

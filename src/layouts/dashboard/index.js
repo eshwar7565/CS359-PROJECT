@@ -19,7 +19,7 @@ const DashboardLayout = () => {
   const dispatch = useDispatch();
  
   const {user_id} = useSelector((state) => state.auth);
-const isLoggedIn =true;
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   // TO DO audio and video calls 
  
