@@ -21,8 +21,6 @@ import {
 } from "../../redux/slices/conversation";
 import { socket } from "../../socket";
 
-
-
 const ChatComponent = () => {
   const isMobile = useResponsive("between", "md", "xs", "sm");
   const theme = useTheme();
@@ -72,6 +70,7 @@ const ChatComponent = () => {
     </Stack>
   );
 };
+
 
 const Conversation = ({ isMobile, menu }) => {
     const dispatch = useDispatch();
@@ -144,6 +143,8 @@ const Conversation = ({ isMobile, menu }) => {
     );
   };
 
+
+  
 export default ChatComponent;
 
 export { Conversation };

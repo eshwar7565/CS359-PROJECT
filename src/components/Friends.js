@@ -175,7 +175,7 @@ const FriendRequestElement = ({
     lastName,
     incoming,
     missed,
-    // online,
+    online,
     _id,
   }) => {
     const theme = useTheme();
