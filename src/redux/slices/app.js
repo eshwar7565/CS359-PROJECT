@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "../../utils/axios";
 
-
+// import S3 from "../../utils/s3";
+// import {v4} from 'uuid';
+// import S3 from "../../utils/s3";
+// import { S3_BUCKET_NAME } from "../../config";
+// ----------------------------------------------------------------------
 
 const initialState = {
 user:{},
@@ -23,8 +27,6 @@ user:{},
   friendRequests:[],
   chat_type: null,
   room_id: null,
-
-
 }
 
 
@@ -83,13 +85,7 @@ const slice = createSlice({
       state.chat_type = "individual";
       state.room_id = action.payload.room_id;
     },
-
-    
-    
-
   }
-
-
 })
 
 export default slice.reducer;
@@ -161,7 +157,6 @@ export function FetchAllUsers() {
     await axios
       .get(
         "/user/get-all-verified-users",
-
         {
           headers: {
             "Content-Type": "application/json",
@@ -250,34 +245,28 @@ export const FetchUserProfile = () => {
       });
   };
 };
-
 export const UpdateUserProfile = (formValues) => {
   return async (dispatch, getState) => {
-    // Assuming your server API endpoint for updating the user profile is /update-profile
-    const apiUrl = '/user/update-me';
-
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'PUT',
+    
+    axios
+    .patch(
+      "/user/update-me",
+      { ...formValues},
+      {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getState().auth.token}`,
         },
-        body: JSON.stringify(formValues),
-      });
-
-      if (response.ok) {
-        // If needed, dispatch an action to handle a successful update
-        // dispatch(updateUserProfileSuccessAction());
-      } else {
-        // If the update fails, you might want to handle the error
-        console.error('Update failed:', response.statusText);
-        // dispatch(updateUserProfileFailureAction(response.statusText));
       }
-    } catch (error) {
-      // Handle network or other errors
-      console.error('Update error:', error);
-      // dispatch(updateUserProfileFailureAction('Failed to update profile'));
-    }
-  };
+    )
+    .then((response) => {
+      console.log(response);
+      dispatch(slice.actions.updateUser({ user: response.data.data }));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 };
 
+    
