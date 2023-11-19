@@ -1,140 +1,48 @@
 import React, { useEffect } from 'react';
-import { Avatar, Box, Button, Divider, IconButton, Stack, Typography } from '@mui/material';
+import {
+    Box,
+    Button,
+    Divider,
+    IconButton,
+    Stack,
+    Typography
+} from '@mui/material';
 import { ArchiveBox, CircleDashed, MagnifyingGlass, Users } from 'phosphor-react';
-import { styled } from '@mui/material/styles';
-import Badge from '@mui/material/Badge';
 // import { SimpleBarStyle } from '../../components/Scrollbar';
 import { useTheme } from "@mui/material/styles";
+// import useResponsive from "../../hooks/useResponsive";
+
+// import BottomNav from "../../layouts/dashboard/BottomNav";
+
+
+// import { ChatList } from "../../data";
+import ChatElement from "../../components/ChatElement";
 
 import {
     Search,
     SearchIconWrapper,
     StyledInputBase,
 } from "../../components/Search";
-import { faker } from '@faker-js/faker';
 
-import { useState } from 'react';
 import Friends from '../../sections/main/Friends';
+
+import { socket } from "../../socket";
 import { useDispatch, useSelector } from 'react-redux';
-import { SelectConversation } from '../../redux/slices/app';
-import { socket } from '../../socket';
-import { FetchDirectConversations, SetCurrentConversation } from '../../redux/slices/conversation';
+import { FetchDirectConversations } from '../../redux/slices/conversation';
+import { useState } from 'react';
 
 const user_id = window.localStorage.getItem("user_id");
-
-const StyledBadge = styled(Badge)(({ theme }) => ({
-    '& .MuiBadge-badge': {
-        backgroundColor: '#44b700',
-        color: '#44b700',
-        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-        '&::after': {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            animation: 'ripple 1.2s infinite ease-in-out',
-            border: '1px solid currentColor',
-            content: '""',
-        },
-    },
-    '@keyframes ripple': {
-        '0%': {
-            transform: 'scale(.8)',
-            opacity: 1,
-        },
-        '100%': {
-            transform: 'scale(2.4)',
-            opacity: 0,
-        },
-    },
-}));
-
-
-
-
-
-const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
-    const theme = useTheme();
-    const dispatch =useDispatch();
-     
-    return (
-        <Box 
-        
-        onClick={()=>{
-                dispatch(SetCurrentConversation({ room_id : id , name : name }));
-
-        }}
-        
-        sx={{
-            width: "100%",
-            backgroundColor:
-                theme.palette.mode === "light"
-                    ? "#F8FAFF"
-                    : theme.palette.background,
-            borderRadius: 1,
-
-
-
-        }}
-            p={2}>
-            <Stack direction="row"
-                alignItems={"center"}
-                justifyContent="space-between"
-
-            >
-                <Stack direction="row" spacing={2}>
-
-                    {online ? <StyledBadge overlap='circular'
-                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                        variant="dot">
-                        <Avatar  />
-                    </StyledBadge>
-                        :
-                        <Avatar />
-                    }
-
-
-                    <Stack spacing={0.3}>
-                        <Typography variant='subtitle2'>
-                            {name}</Typography>
-                        <Typography variant='subtitle2'>
-                            {msg}</Typography>
-                    </Stack>
-                    <Stack alignItems="center" spacing={2}>
-                     
-                        <Badge color="primary" badgeContent={unread}>
-                        </Badge>
-                    </Stack>
-                </Stack>
-
-
-            </Stack>
-
-
-        </Box>
-    )
-}
-
-
-
 
 
 const Chats = () => {
     const theme = useTheme();
-    const [openDialog, setOpenDialog] = useState(false);
+    // const isDesktop = useResponsive("up", "md");
 
     const dispatch = useDispatch();
 
     const {conversations} = useSelector((state) => state.conversation.direct_chat);
 
-    const handleCloseDialog = () => {
-        setOpenDialog(false);
-    };
-    const handleOpenDialog = () => {
-        setOpenDialog(true);
-    };
+ 
 
     useEffect(() => {
         socket.emit("get_direct_conversations", { user_id }, (data) => {
@@ -143,7 +51,15 @@ const Chats = () => {
     
           dispatch(FetchDirectConversations({ conversations: data }));
         });
-      }, []);
+      }, [dispatch]);
+
+      const [openDialog, setOpenDialog] = useState(false);
+      const handleCloseDialog = () => {
+          setOpenDialog(false);
+      };
+      const handleOpenDialog = () => {
+          setOpenDialog(true);
+      };
     return (
         <>
             <Box
@@ -159,7 +75,7 @@ const Chats = () => {
                     boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
                 }}
             >
-                <Stack p={3} spacing={2} sx={{ height: "100vh", }}>
+                <Stack p={3} spacing={2} sx={{ maxHeight: "100vh" }}>
                     <Stack direction="row" alignItems={"center"} justifyContent={"space-between"}>
                         <Typography variant='h5'>
                             Chats
