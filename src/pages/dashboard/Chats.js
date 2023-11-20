@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import {
     Box,
-    Button,
+    // Button,
     Divider,
     IconButton,
     Stack,
     Typography
 } from '@mui/material';
-import { ArchiveBox, CircleDashed, MagnifyingGlass, Users } from 'phosphor-react';
+import { 
+    // ArchiveBox,
+    //  CircleDashed,
+    //   MagnifyingGlass, 
+      Users } from 'phosphor-react';
 // import { SimpleBarStyle } from '../../components/Scrollbar';
 import { useTheme } from "@mui/material/styles";
 // import useResponsive from "../../hooks/useResponsive";
@@ -18,11 +22,11 @@ import { useTheme } from "@mui/material/styles";
 // import { ChatList } from "../../data";
 import ChatElement from "../../components/ChatElement";
 
-import {
-    Search,
-    SearchIconWrapper,
-    StyledInputBase,
-} from "../../components/Search";
+// import {
+//     Search,
+//     SearchIconWrapper,
+//     StyledInputBase,
+// } from "../../components/Search";
 
 import Friends from '../../sections/main/Friends';
 
@@ -92,34 +96,18 @@ const Chats = () => {
                             }>
                                 <Users />
                             </IconButton>
-                            <IconButton>
-                                <CircleDashed>
-                                </CircleDashed>
-                            </IconButton>
+                           
                         </Stack>
 
 
 
                     </Stack>
-                    <Stack sx={{ width: "100%" }}>
-                        <Search>
-                            <SearchIconWrapper>
-                                <MagnifyingGlass color="#709CE6" />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                placeholder="Search…"
-                                inputProps={{ "aria-label": "search" }}
-                            />
-                        </Search>
-                    </Stack>
+                   
                     <Stack spacing={1}>
-                        <Stack direction={"row"} spacing={1.5} alignItems="center">
-                            <ArchiveBox size={24} />
-                            <Button variant="text">Archive</Button>
-                        </Stack>
+                        
                         <Divider />
                     </Stack>
-                    <Stack sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}>
+                    <Stack sx={{ flexGrow: 1, height: "100%" }}>
 
                         <Stack spacing={2.4}>
                            { /*<Typography variant="subtitle2" sx={{ color: "#676667" }}>

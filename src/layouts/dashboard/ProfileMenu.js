@@ -67,9 +67,7 @@ const ProfileMenu = () => {
                     if(idx === 0) {
                       navigate("/profile");
                     }
-                    else if(idx === 1) {
-                      navigate("/settings");
-                    }
+                  
                     else {
                       dispatch(LogoutUser());
                       socket.emit("end", {user_id});

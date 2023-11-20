@@ -1,13 +1,15 @@
 import { Box, Stack } from '@mui/material'
-import React, { useEffect, useRef }  from 'react'
-import { Chat_History } from '../../data'
-import { useTheme } from "@mui/material/styles";
+import React, { useEffect, 
+    // useRef
+ }  from 'react'
+// import { Chat_History } from '../../data'
+// import { useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { Timeline, TextMsg, MediaMsg, ReplyMsg, LinkMsg, DocMsg } from './MsgTypes'
 
 import {
     FetchCurrentMessages,
-    SetCurrentConversation,
+    // SetCurrentConversation,
   } from "../../redux/slices/conversation";
   import { socket } from "../../socket";
 const Message = ({menu}) => {
@@ -29,7 +31,7 @@ const Message = ({menu}) => {
       });
   
      
-    }, []);
+    }, [dispatch,room_id,conversations]);
 
     return (
 
@@ -57,7 +59,7 @@ const Message = ({menu}) => {
                                         return <ReplyMsg el={el} menu={menu}  />
 
                                     default:
-                                        return <TextMsg el={el} menu={menu} />;
+                                        return <TextMsg el={el} />;
 
 
                                 }

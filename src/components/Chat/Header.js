@@ -102,7 +102,8 @@ const ChatHeader = () => {
           onClick={() => {
             dispatch(ToggleSidebar());
           }}
-          spacing={2}
+          spacing={3}
+         
           direction="row"
         >
           <Box>
