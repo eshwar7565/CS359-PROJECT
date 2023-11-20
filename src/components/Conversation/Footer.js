@@ -13,7 +13,8 @@ import {
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { socket } from "../../socket";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { FetchCurrentMessages } from '../../redux/slices/conversation';
 
 
 const StyledInput = styled(TextField)(({ theme }) => ({
@@ -162,13 +163,17 @@ const Footer = () => {
 
     const theme = useTheme();
     const [openPicker, setOpenPicker] = React.useState(false);
+    const dispatch = useDispatch();
     const { current_conversation } = useSelector(
         (state) => state.conversation.direct_chat
       );
+     
       const user_id = window.localStorage.getItem("user_id");
       const {  room_id } = useSelector((state) => state.app);
       const [value, setValue] = useState("");
       const inputRef = useRef(null);
+
+      
 
       function handleEmojiClick(emoji) {
         const input = inputRef.current;
@@ -187,6 +192,28 @@ const Footer = () => {
           input.selectionStart = input.selectionEnd = selectionStart + 1;
         }
       }
+
+      const handleSendMessage = () => {
+        socket.emit("text_message", {
+          message: linkify(inputRef.current.value),
+          conversation_id: room_id,
+          from: user_id,
+          to: current_conversation.user_id,
+          type: containsUrl(inputRef.current.value) ? "Link" : "Text",
+        });
+    
+           // Update the input value
+           inputRef.current.value = 'Write a message...';
+    
+        // Fetch current messages after sending the message
+        
+        socket.emit("get_messages", { conversation_id: current_conversation?.id }, (data) => {
+          // data => list of messages
+          console.log(data, "List of messages");
+          dispatch(FetchCurrentMessages({ messages: data }));
+        });
+      
+      };
 
     return (
         <Box
@@ -248,17 +275,10 @@ const Footer = () => {
                         alignItems="center"
                         justifyContent={"center"}>
                         <IconButton 
-                        onClick={() => {
-                            socket.emit("text_message", {
-                              message: linkify(value),
-                              conversation_id: room_id,
-                              from: user_id,
-                              to: current_conversation.user_id,
-                              type: containsUrl(value) ? "Link" : "Text",
-                            });
+                        onClick={handleSendMessage}
 
-                            inputRef.current.value='Write a message...'
-                          }}>
+                           
+                          >
                             <PaperPlaneTilt color='#fff' >
                             </PaperPlaneTilt>
                         </IconButton>

@@ -17,14 +17,17 @@ import {
   Sticker,
   User,
 } from "phosphor-react";
+
+
 import { useTheme, styled } from "@mui/material/styles";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import useResponsive from "../../hooks/useResponsive";
 
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { socket } from "../../socket";
-import { useSelector } from "react-redux";
+import { useSelector ,useDispatch } from "react-redux";
+import { FetchCurrentMessages } from "../../redux/slices/conversation";
 
 const StyledInput = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-input": {
@@ -66,11 +69,9 @@ const Actions = [
   },
 ];
 
-const ChatInput = ({ openPicker, setOpenPicker, setValue,
-  value,
-  inputRef }) => {
+const ChatInput = ({ openPicker, setOpenPicker, setValue, value,inputRef }) => {
   const [openActions, setOpenActions] = React.useState(false);
-
+  
   return (
     <StyledInput
       inputRef={inputRef}
@@ -162,6 +163,8 @@ const Footer = () => {
     (state) => state.conversation.direct_chat
   );
 
+  const [isSending, setIsSending] = useState(false);
+ 
   const user_id = window.localStorage.getItem("user_id");
 
   const isMobile = useResponsive("between", "md", "xs", "sm");
@@ -170,11 +173,14 @@ const Footer = () => {
 
 
   const [openPicker, setOpenPicker] = React.useState(false);
-
+  const dispatch = useDispatch();
   const [value, setValue] = useState("");
   const inputRef = useRef(null);
 
 
+  const { conversations } = useSelector(
+    (state) => state.conversation.direct_chat
+  );
   function handleEmojiClick(emoji) {
     const input = inputRef.current;
 
@@ -193,27 +199,33 @@ const Footer = () => {
     }
   }
 
-  const sendMessage = () => {
+
+  
+  useEffect(() => {
+    if (isSending) {
+      // Fetch current messages after sending the message
+      const current = conversations.find((el) => el?.id === room_id);
+      socket.emit("get_messages", { conversation_id: current?.id }, (data) => {
+        // data => list of messages
+        console.log(data, "List of messages");
+        dispatch(FetchCurrentMessages({ messages: data }));
+        setIsSending(false); // Reset the isSending state
+        // Update the input value after the message is sent
+        setValue("Write a message...");
+      });
+    }
+  }, [isSending, room_id, conversations, dispatch, setValue]);
+
+  const handleSendMessage = () => {
     socket.emit("text_message", {
-      message: linkify(value),
+      message: linkify(inputRef.current.value),
       conversation_id: room_id,
       from: user_id,
       to: current_conversation.user_id,
-      type: containsUrl(value) ? "Link" : "Text",
+      type: containsUrl(inputRef.current.value) ? "Link" : "Text",
     });
-  };
-  
 
-  const handleButtonClick = () => {
-    sendMessage();
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      // Prevent the default behavior of the Enter key (e.g., form submission)
-      // event.preventDefault();
-      sendMessage();
-    }
+    setIsSending(true); // Set isSending to true when sending the message
   };
 
   return (
@@ -257,7 +269,7 @@ const Footer = () => {
             inputRef={inputRef}
             value={value}
             setValue={setValue}
-            onKeyPress={handleKeyPress}
+          
              />
           </Stack>
           <Box
@@ -274,7 +286,7 @@ const Footer = () => {
               justifyContent="center"
             >
               <IconButton
-              onClick={handleButtonClick}
+              onClick={handleSendMessage}
               >
                 <PaperPlaneTilt color="#ffffff" />
               </IconButton>
