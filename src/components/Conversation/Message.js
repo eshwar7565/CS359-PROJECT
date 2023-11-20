@@ -33,9 +33,13 @@ const Message = ({menu}) => {
         console.log(data, "List of messages");
         dispatch(FetchCurrentMessages({ messages: data }));
       });
+      socket.on("new_message", (data) => {
+        // Update your messages state or dispatch an action to update your Redux store
+        dispatch(FetchCurrentMessages({ messages: [...current_messages, data.message] }));
+      });
   
 
-    }, [dispatch,room_id,conversations]);
+    }, [dispatch,room_id,conversations,current_messages]);
 
  
 
