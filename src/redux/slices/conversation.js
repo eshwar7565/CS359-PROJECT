@@ -21,13 +21,22 @@ const slice = createSlice({
                 const user = el.participants.find(
                     (elm) => elm._id.toString() !== user_id
                 );
+                let lastMessage = {};
+                if (el.messages.length > 0) {
+                    lastMessage = el.messages.slice(-1)[0].text;
+                }
+                else
+
+                {
+                  lastMessage = "";
+                }
                 return {
                     id: el._id,
                     user_id: user?._id,
                     name: user?.firstName ,
                     online: user?.status === "Online",
                     // img: faker.image.avatar(),
-                    msg: el.messages.slice(-1)[0].text, 
+                    msg:lastMessage, 
                     // time: "9:36",
                     unread: 0,
                     pinned: false,
@@ -48,13 +57,24 @@ const slice = createSlice({
                   const user = this_conversation.participants.find(
                     (elm) => elm._id.toString() !== user_id
                   );
+
+                  let lastMessage = {};
+                  if (el.messages.length > 0) {
+                      lastMessage = el.messages.slice(-1)[0].text;
+                  }
+                  else
+  
+                  {
+                    lastMessage = "";
+                  }
+
                   return {
                     id: this_conversation._id._id,
                     user_id: user?._id,
                     name: user?.firstName,
                     // online: user?.status === "Online",
                     // img: faker.image.avatar(),
-                    msg: el.messages.slice(-1)[0].text, 
+                    msg:lastMessage, 
                     time: "9:36",
                     unread: 0,
                     pinned: false,
@@ -72,13 +92,25 @@ const slice = createSlice({
             state.direct_chat.conversations = state.direct_chat.conversations.filter(
               (el) => el?.id !== this_conversation._id
             );
+
+            let lastMessage = {};
+            if (user.messages.length > 0) {
+                lastMessage = user.messages.slice(-1)[0].text;
+            }
+            else
+
+            {
+              lastMessage = "";
+            }
+
+
             state.direct_chat.conversations.push({
               id: this_conversation._id._id,
               user_id: user?._id,
               name: user?.firstName,
             //   online: user?.status === "Online",
             //   img: faker.image.avatar(),
-            msg: user.messages.slice(-1)[0].text, 
+            msg: lastMessage, 
               time: "9:36",
               unread: 0,
               pinned: false,

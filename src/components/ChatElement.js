@@ -4,9 +4,8 @@ import { styled, useTheme,alpha} from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { SelectConversation } from "../redux/slices/app";
 
-const truncateText = (string, n) => {
-  return string?.length > n ? `${string?.slice(0, n)}...` : string;
-};
+import {SetCurrentConversation} from "../redux/slices/conversation";
+
 
 const StyledChatBox = styled(Box)(({ theme }) => ({
   "&:hover": {
@@ -46,8 +45,16 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const ChatElement = ({  img,name, msg, time, unread, online ,id}) => {
   const dispatch = useDispatch(); 
   const {room_id} = useSelector((state) => state.app); 
+  console.log(room_id);
   const selectedChatId = room_id?.toString();
   let isSelected = +selectedChatId === id;
+
+  const { conversations } = useSelector(
+    (state) => state.conversation.direct_chat
+  );
+  const current = conversations.find((el) => el?.id === room_id);
+  console.log(current);
+
 
   if (!selectedChatId) {
     isSelected = false;
@@ -58,6 +65,8 @@ const ChatElement = ({  img,name, msg, time, unread, online ,id}) => {
       <StyledChatBox
       onClick={() => {
         dispatch(SelectConversation({room_id: id}));
+        dispatch(SetCurrentConversation(current));
+    
       }}
       sx={{
         width: "100%",
@@ -111,5 +120,9 @@ const ChatElement = ({  img,name, msg, time, unread, online ,id}) => {
         </StyledChatBox>
     )
 }
+
+const truncateText = (string, n) => {
+  return string?.length > n ? `${string?.slice(0, n)}...`: string;
+};
 
 export default ChatElement;

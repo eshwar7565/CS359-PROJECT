@@ -11,10 +11,10 @@ import {
 import { useTheme, alpha } from "@mui/material/styles";
 import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
 import { Message_options } from "../../data";
-import { Link } from "react-router-dom";
-import truncateString from "../../utils/truncate";
+// import { Link } from "react-router-dom";
+// import truncateString from "../../utils/truncate";
 // import { LinkPreview } from "@dhaiwat10/react-link-preview";
-import Embed from "react-embed";
+// import Embed from "react-embed";
 
 
 const TextMsg = ({ el, menu }) => {
@@ -147,11 +147,11 @@ const LinkMsg = ({ el, menu }) => {
             }}
           >
             <Stack direction={"column"} spacing={2}>
-              <Embed
+              
                 width="300px"
                 isDark
                 url={`https://youtu.be/xoWxBR34qLE`}
-              />
+              
             </Stack>
           </Stack>
           <Typography

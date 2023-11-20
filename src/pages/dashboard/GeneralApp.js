@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Box,Typography } from "@mui/material";
 
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import NoChat from "../../assets/Illustration/NoChat";
 
 import { useTheme } from "@mui/material/styles"
@@ -16,7 +16,7 @@ const GeneralApp = () => {
   const theme = useTheme();
   const { sideBar , room_id ,chat_type } = useSelector((state) => state.app);
 
-  const {current_conversation}=useSelector((state)=>state.conversation.direct_chat);
+  // const {current_conversation}=useSelector((state)=>state.conversation.direct_chat);
   return (
     <Stack direction="row" sx={{ width: "100%" }}>
     {
@@ -38,7 +38,7 @@ const GeneralApp = () => {
         {
           // Conversation
         }
-        {room_id!=null && chat_type === "individual" && current_conversation!=null ?
+        {room_id!=null && chat_type === "individual"  ?
         <Conversation /> :
         <Stack
         spacing={2}
