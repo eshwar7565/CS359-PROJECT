@@ -68,7 +68,7 @@ const Actions = [
 
 const ChatInput = ({ openPicker, setOpenPicker, setValue,
   value,
-  inputRef, }) => {
+  inputRef }) => {
   const [openActions, setOpenActions] = React.useState(false);
 
   return (
@@ -77,6 +77,7 @@ const ChatInput = ({ openPicker, setOpenPicker, setValue,
       value={value}
       onChange={(event) => {
         setValue(event.target.value);
+       
       }}
       fullWidth
       placeholder="Write a message..."
@@ -165,7 +166,7 @@ const Footer = () => {
 
   const isMobile = useResponsive("between", "md", "xs", "sm");
 
-  const { sideBar, room_id } = useSelector((state) => state.app);
+  const {  room_id } = useSelector((state) => state.app);
 
 
   const [openPicker, setOpenPicker] = React.useState(false);
@@ -192,6 +193,27 @@ const Footer = () => {
     }
   }
 
+  const sendMessage = () => {
+    socket.emit("text_message", {
+      message: linkify(value),
+      conversation_id: room_id,
+      from: user_id,
+      to: current_conversation.user_id,
+      type: containsUrl(value) ? "Link" : "Text",
+    });
+  };
+
+  const handleButtonClick = () => {
+    sendMessage();
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      // Prevent the default behavior of the Enter key (e.g., form submission)
+      event.preventDefault();
+      sendMessage();
+    }
+  };
 
   return (
     <Box
@@ -234,6 +256,7 @@ const Footer = () => {
             inputRef={inputRef}
             value={value}
             setValue={setValue}
+            onKeyPress={handleKeyPress}
              />
           </Stack>
           <Box
@@ -250,15 +273,7 @@ const Footer = () => {
               justifyContent="center"
             >
               <IconButton
-                onClick={() => {
-                  socket.emit("text_message", {
-                    message: linkify(value),
-                    conversation_id: room_id,
-                    from: user_id,
-                    to: current_conversation.user_id,
-                    type: containsUrl(value) ? "Link" : "Text",
-                  });
-                }}
+              onClick={handleButtonClick}
               >
                 <PaperPlaneTilt color="#ffffff" />
               </IconButton>

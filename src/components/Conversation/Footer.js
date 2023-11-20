@@ -166,7 +166,7 @@ const Footer = () => {
         (state) => state.conversation.direct_chat
       );
       const user_id = window.localStorage.getItem("user_id");
-      const { sideBar, room_id } = useSelector((state) => state.app);
+      const {  room_id } = useSelector((state) => state.app);
       const [value, setValue] = useState("");
       const inputRef = useRef(null);
 
@@ -256,6 +256,8 @@ const Footer = () => {
                               to: current_conversation.user_id,
                               type: containsUrl(value) ? "Link" : "Text",
                             });
+
+                            inputRef.current.value='Write a message...'
                           }}>
                             <PaperPlaneTilt color='#fff' >
                             </PaperPlaneTilt>
