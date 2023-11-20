@@ -117,7 +117,7 @@ const Sidebar = () => {
               )
 
             ))}
-            <Divider sx={{ width: 48 }} />
+           
             {Nav_Settings.map((el) => {
               return el.index === selectedTab ? (
                 <Box
