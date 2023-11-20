@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
     Box,
     // Button,
@@ -15,55 +15,32 @@ import {
 // import { SimpleBarStyle } from '../../components/Scrollbar';
 import { useTheme } from "@mui/material/styles";
 // import useResponsive from "../../hooks/useResponsive";
-
 // import BottomNav from "../../layouts/dashboard/BottomNav";
-
-
 // import { ChatList } from "../../data";
 import ChatElement from "../../components/ChatElement";
-
 // import {
 //     Search,
 //     SearchIconWrapper,
 //     StyledInputBase,
 // } from "../../components/Search";
-
 import Friends from '../../sections/main/Friends';
-
 import { socket } from "../../socket";
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchDirectConversations } from '../../redux/slices/conversation';
 import { useState } from 'react';
-
 const user_id = window.localStorage.getItem("user_id");
-
-
 const Chats = () => {
     const theme = useTheme();
-    // const isDesktop = useResponsive("up", "md");
-
     const dispatch = useDispatch();
-
     const {conversations} = useSelector((state) => state.conversation.direct_chat);
-
- 
-
-    useEffect(() => {
-        socket.emit("get_direct_conversations", { user_id }, (data) => {
-        //   console.log(data); // this data is the list of conversations
-          // dispatch action
-    
-          dispatch(FetchDirectConversations({ conversations: data }));
-        });
-      }, [dispatch]);
-
+    useEffect(() =>
+    {
+        socket.emit("get_direct_conversations", { user_id }, (data) => 
+    {
+      dispatch(FetchDirectConversations({ conversations: data }));});}, [dispatch]);
       const [openDialog, setOpenDialog] = useState(false);
-      const handleCloseDialog = () => {
-          setOpenDialog(false);
-      };
-      const handleOpenDialog = () => {
-          setOpenDialog(true);
-      };
+      const handleCloseDialog = () => {setOpenDialog(false);};
+      const handleOpenDialog = () => { setOpenDialog(true);};
     return (
         <>
             <Box
@@ -84,7 +61,6 @@ const Chats = () => {
                         <Typography variant='h5'>
                             Chats
                         </Typography>
-
                         <Stack direction="row"
                             alignItems="center"
                             spacing={1}>
@@ -92,23 +68,15 @@ const Chats = () => {
                                 () => {
                                     handleOpenDialog();
                                 }
-
                             }>
                                 <Users />
                             </IconButton>
-                           
                         </Stack>
-
-
-
                     </Stack>
-                   
                     <Stack spacing={1}>
-                        
                         <Divider />
                     </Stack>
                     <Stack sx={{ flexGrow: 1, height: "100%" }}>
-
                         <Stack spacing={2.4}>
                            { /*<Typography variant="subtitle2" sx={{ color: "#676667" }}>
                                 Pinned
@@ -125,24 +93,14 @@ const Chats = () => {
                             {conversations.filter((el) => !el.pinned).map((el, idx) => {
                                 return <ChatElement {...el} />;
                             })}
-
                         </Stack>
-
-
                     </Stack>
-
                 </Stack>
-
             </Box>
-
             {openDialog && (
                 <Friends open={openDialog} handleClose={handleCloseDialog} />
             )}
         </>
-
-
-
     );
 };
-
 export default Chats

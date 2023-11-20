@@ -3,9 +3,7 @@ import { Box, Badge, Stack, Avatar, Typography } from "@mui/material";
 import { styled, useTheme,alpha} from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { SelectConversation } from "../redux/slices/app";
-
 import {SetCurrentConversation} from "../redux/slices/conversation";
-
 
 const StyledChatBox = styled(Box)(({ theme }) => ({
   "&:hover": {
@@ -41,21 +39,13 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
   }));
   
-
-const ChatElement = ({  img,name, msg, time, unread, online ,id}) => {
+const ChatElement = ({  img,name, time, unread, online ,id}) => {
   const dispatch = useDispatch(); 
   const {room_id} = useSelector((state) => state.app); 
-  // console.log(room_id); 
   const selectedChatId = room_id?.toString();
   let isSelected = +selectedChatId === id;
-
-  const { conversations } = useSelector(
-    (state) => state.conversation.direct_chat
-  );
+  const { conversations } = useSelector((state) => state.conversation.direct_chat);
   const current = conversations.find((el) => el?.id === room_id);
-  // console.log(current);
-
-
   if (!selectedChatId) {
     isSelected = false;
   }
@@ -84,7 +74,6 @@ const ChatElement = ({  img,name, msg, time, unread, online ,id}) => {
             <Stack direction="row"
                 alignItems={"center"}
                 justifyContent="space-between"
-
             >
                 <Stack direction="row" spacing={2}>
                 {" "}
@@ -96,13 +85,9 @@ const ChatElement = ({  img,name, msg, time, unread, online ,id}) => {
                         :
                         <Avatar />
                     }
-
-
                     <Stack spacing={0.3}>
                         <Typography variant='subtitle2'>
                             {name}</Typography>
-                        <Typography variant='subtitle2'>
-                        {truncateText(msg, 20)}</Typography>
                     </Stack>
                     <Stack alignItems="center" spacing={2}>
                         <Typography>
@@ -112,17 +97,13 @@ const ChatElement = ({  img,name, msg, time, unread, online ,id}) => {
                         </Badge>
                     </Stack>
                 </Stack>
-
-
             </Stack>
-
-
         </StyledChatBox>
     )
 }
 
-const truncateText = (string, n) => {
-  return string?.length > n ? `${string?.slice(0, n)}...`: string;
-};
+// const truncateText = (string, n) => {
+//   return string?.length > n ? `${string?.slice(0, n)}...`: string;
+// };
 
 export default ChatElement;
