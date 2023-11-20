@@ -2,25 +2,29 @@ import React from 'react';
 import {
     Avatar,
     Box,
-    Divider,
+    // Divider,
     IconButton,
     Stack,
     Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import StyledBadge from '../Styledbadge';
-import { faker } from "@faker-js/faker";
-import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from 'phosphor-react';
+// import { faker } from "@faker-js/faker";
+import { 
+    // CaretDown, MagnifyingGlass, 
+    Phone, VideoCamera } from 'phosphor-react';
 
-import { ToggleSidebar } from '../../redux/slices/app';
-import { useDispatch,useSelector } from 'react-redux';
+// import { ToggleSidebar } from '../../redux/slices/app';
+import { 
+    // useDispatch
+    useSelector } from 'react-redux';
 const Header = () => {
     const theme = useTheme();
-    const dispatch =useDispatch();
+    // const dispatch =useDispatch();
 
     const {current_conversation} = useSelector((state) => state.conversation.direct_chat);
     
-    console.log( current_conversation?.name ); 
+    // console.log( current_conversation?.name ); 
     return (
         <Box
             p={2}

@@ -45,7 +45,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const ChatElement = ({  img,name, msg, time, unread, online ,id}) => {
   const dispatch = useDispatch(); 
   const {room_id} = useSelector((state) => state.app); 
-  console.log(room_id);
+  // console.log(room_id); 
   const selectedChatId = room_id?.toString();
   let isSelected = +selectedChatId === id;
 
@@ -53,7 +53,7 @@ const ChatElement = ({  img,name, msg, time, unread, online ,id}) => {
     (state) => state.conversation.direct_chat
   );
   const current = conversations.find((el) => el?.id === room_id);
-  console.log(current);
+  // console.log(current);
 
 
   if (!selectedChatId) {

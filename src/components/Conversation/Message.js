@@ -1,5 +1,6 @@
 import { Box, Stack } from '@mui/material'
 import React, { useEffect, 
+    // useState
     // useRef
  }  from 'react'
 // import { Chat_History } from '../../data'
@@ -9,6 +10,7 @@ import { Timeline, TextMsg, MediaMsg, ReplyMsg, LinkMsg, DocMsg } from './MsgTyp
 
 import {
     FetchCurrentMessages,
+    // addNewMessages,
     // SetCurrentConversation,
   } from "../../redux/slices/conversation";
   import { socket } from "../../socket";
@@ -21,6 +23,8 @@ const Message = ({menu}) => {
     );
     const { room_id } = useSelector((state) => state.app);
 
+
+
     useEffect(() => {
       const current = conversations.find((el) => el?.id === room_id);
   
@@ -30,8 +34,10 @@ const Message = ({menu}) => {
         dispatch(FetchCurrentMessages({ messages: data }));
       });
   
-     
+
     }, [dispatch,room_id,conversations]);
+
+ 
 
     return (
 

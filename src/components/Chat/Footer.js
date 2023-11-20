@@ -202,6 +202,7 @@ const Footer = () => {
       type: containsUrl(value) ? "Link" : "Text",
     });
   };
+  
 
   const handleButtonClick = () => {
     sendMessage();
@@ -210,7 +211,7 @@ const Footer = () => {
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       // Prevent the default behavior of the Enter key (e.g., form submission)
-      event.preventDefault();
+      // event.preventDefault();
       sendMessage();
     }
   };

@@ -131,6 +131,9 @@ const slice = createSlice({
             }));
             state.direct_chat.current_messages = formatted_messages;
           },
+          addNewMessages: (state, action) => {
+            state.direct_chat.current_messages = [...state.direct_chat.current_messages, ...action.payload.newMessages];
+          },
           addDirectMessage(state, action) {
             state.direct_chat.current_messages.push(action.payload.message);
           }
@@ -176,3 +179,5 @@ export const FetchDirectConversations = ({ conversations }) => {
       dispatch(slice.actions.addDirectMessage({message}));
     }
   }
+
+  export const {  addNewMessages } = slice.actions;
