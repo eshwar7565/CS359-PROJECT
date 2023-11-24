@@ -23,6 +23,7 @@ user:{},
   },
 
   users:[],
+  all_users : [],
   friends : [] ,
   friendRequests:[],
   chat_type: null,

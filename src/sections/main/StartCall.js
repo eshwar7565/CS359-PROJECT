@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useEffect } from 'react';
 
 import { Dialog,
     DialogContent,
@@ -10,11 +10,30 @@ import { Dialog,
 import { MembersList } from '../../data';
 
 import { CallElement } from '../../components/CallElement';
+import { CallList } from "../../data";
+import { useDispatch, useSelector } from "react-redux";
+import { FetchAllUsers } from "../../redux/slices/app";
+import {faker} from "@faker-js/faker";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 
 const StartCall = ({ open, handleClose }) => {
+    const {all_users} = useSelector((state) => state.app);
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(FetchAllUsers());
+    }, []);
+
+    console.log(CallList, all_users, "Call List Info");
+
+    const list = all_users.map((el) => ({
+        id: el?._id,
+        name: el?.firstName ,
+        avatar : faker.image.avatar() ,
+   
+      }));
     return (
 
         <Dialog
@@ -31,8 +50,10 @@ const StartCall = ({ open, handleClose }) => {
 
             <DialogContent>
                 <Stack sx={{ height: "100%" }}>
+            
                     <Stack spacing={2.4}>
-                        {MembersList.map((el) => {
+                    
+                        {MembersList.map((el) => { // changing this to list will trigger the for users
                             return <CallElement  {...el} handleClose={handleClose} />;
                         })}
                     </Stack>
