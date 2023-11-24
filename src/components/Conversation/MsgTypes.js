@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from '@mui/material/styles';
+import { useTheme,alpha } from '@mui/material/styles';
 import { Divider, Box, Stack, Typography, Link, IconButton, Menu, MenuItem } from '@mui/material';
 
 import { DotsThreeVertical, DownloadSimple, Image } from 'phosphor-react';
@@ -16,7 +16,7 @@ const DocMsg = ({ el,menu }) => {
             <Box p={1.5}
                 sx={{
                     backgroundColor: el.incoming ?
-                        theme.palette.background.default
+                    alpha(theme.palette.background.default, 1)
                         : theme.palette.primary.main,
 
                     borderRadius: 1.5,
@@ -209,14 +209,14 @@ const TextMsg = ({ el , menu}) => {
 
             <Box p={1.5}
                 sx={{
-                    backgroundColor: el.incoming ? theme.palette.background.default : theme.palette.primary.main,
+                    backgroundColor: el.incoming ? theme.palette.primary[theme.palette.mode=== 'dark' ? 'main' : 'dark' ] : theme.palette.primary[theme.palette.mode === 'dark' ? 'dark' : 'main' ],
 
                     borderRadius: 1.5,
                     width: "max-content",
 
                 }}>
 
-                <Typography variant="body2" color={el.incoming ? theme.palette.text : "#fff"}>
+                <Typography variant="body2" color={"#ffff"}>
                     {el.message}
                 </Typography>
 
