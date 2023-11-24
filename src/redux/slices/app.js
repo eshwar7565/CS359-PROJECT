@@ -27,6 +27,7 @@ user:{},
   friendRequests:[],
   chat_type: null,
   room_id: null,
+  call_logs: [],
 }
 
 
@@ -36,6 +37,10 @@ const slice = createSlice({
   initialState,
 
   reducers: {
+    fetchCallLogs(state, action) {
+      state.call_logs = action.payload.call_logs;
+    },
+
     fetchUser(state, action) {
       state.user = action.payload.user;
     },
@@ -224,6 +229,25 @@ export function FetchFriendRequests() {
 export const SelectConversation = ({ room_id }) => {
   return async (dispatch, getState) => {
     dispatch(slice.actions.selectConversation({ room_id }));
+  };
+};
+
+export const FetchCallLogs = () => {
+  return async (dispatch, getState) => {
+    axios
+      .get("/user/get-call-logs", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getState().auth.token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        dispatch(slice.actions.fetchCallLogs({ call_logs: response.data.data }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 };
 

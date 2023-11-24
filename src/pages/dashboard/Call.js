@@ -15,17 +15,24 @@ import {
     StyledInputBase,
 } from "../../components/Search";
 
-import { useDispatch, useSelector } from "react-redux";
+
 import { useTheme } from "@mui/material/styles";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import { CallLogElement } from "../../components/CallElement";
 import StartCall from "../../sections/main/StartCall";
+import { useDispatch, useSelector } from "react-redux";
+
+import { FetchCallLogs } from "../../redux/slices/app"; 
 import { CallList } from "../../data";
 
 
 const Call = () => {
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch(FetchCallLogs());
+      }, []);
+    const { call_logs } = useSelector((state) => state.app);
     const [openDialog, setOpenDialog] = useState(false);
     const handleCloseDialog = () => {
         setOpenDialog(false);

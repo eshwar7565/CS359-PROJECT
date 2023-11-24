@@ -4,7 +4,6 @@ import { useTheme } from "@mui/material/styles";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 
 import { ChatHeader, ChatFooter } from "../../components/Chat";
-
 import useResponsive from "../../hooks/useResponsive";
 
 import {
