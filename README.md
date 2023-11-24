@@ -2,7 +2,7 @@
 
 ## Available Scripts
 
-Pull this repository using git to you local machine using [git clone](https://github.com/eshwar7565/CS359-PROJECT.git). \
+Pull this repository using git to you local machine using [git clone](https://github.com/eshwar7565/CS359-PROJECT.git). 
 
 - Open terminal and cd to project folder : 
 	
