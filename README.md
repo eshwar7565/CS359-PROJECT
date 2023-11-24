@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Getting Started with Our App
 
 ## Available Scripts
+
+Pull this repository using git to you local machine using [git clone](https://github.com/eshwar7565/CS359-PROJECT.git) \
+
+cd  CS359-PROJECT
+
 
 In the project directory, you can run:
 
