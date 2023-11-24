@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 import {
-  FetchFriends,
+  FetchAllUsers,
+  // FetchFriends,
     // FetchFriendRequests,
     // FetchFriends,
     // FetchUsers,
@@ -60,7 +61,7 @@ const FriendsList = () => {
   const { users } = useSelector((state) => state.app);
 
   useEffect(() => {
-    dispatch(FetchFriends());
+    dispatch(FetchAllUsers());
   });
 
   return (
