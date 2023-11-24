@@ -2,12 +2,16 @@
 
 ## Available Scripts
 
-Pull this repository using git to you local machine using [git clone](https://github.com/eshwar7565/CS359-PROJECT.git) \
+Pull this repository using git to you local machine using [git clone](https://github.com/eshwar7565/CS359-PROJECT.git). \
 
-cd  CS359-PROJECT
-
-
-In the project directory, you can run:
+- Open terminal and cd to project folder : 
+	
+- then : 
+	npm  install
+- then : 
+	  Make sure you create the server for your db and configure the port number.
+- then : 
+	  npm start
 
 ### `npm start`
 
