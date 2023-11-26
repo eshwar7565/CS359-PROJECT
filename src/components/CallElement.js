@@ -15,7 +15,7 @@ import {
     Phone,
 } from "phosphor-react";
 import { useDispatch } from "react-redux";
-
+import { StartAudioCall } from "../redux/slices/audioCall";
 
 
 const StyledChatBox = styled(Box)(({ theme }) => ({
@@ -74,17 +74,7 @@ const CallLogElement = ({  name, incoming, missed, online, id }) => {
             >
                 <Stack direction="row" spacing={2}>
                     {" "}
-                    {online ? (
-                        <StyledBadge
-                            overlap="circular"
-                            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                            variant="dot"
-                        >
-                            <Avatar  />
-                        </StyledBadge>
-                    ) : (
                         <Avatar  />
-                    )}
                     <Stack spacing={0.3}>
                         <Typography variant="subtitle2">{name}</Typography>
                         <Stack spacing={1} alignItems="center" direction={"row"}>
@@ -137,7 +127,8 @@ const CallElement = ({ img, name, id, handleClose }) => {
                 <Stack direction={"row"} spacing={2} alignItems={"center"}>
                     <IconButton
                         onClick={() => {
-                            
+                            dispatch(StartAudioCall(id));
+                            handleClose();
                         }}
                     >
                         <Phone style={{ color: theme.palette.primary.main }} />
