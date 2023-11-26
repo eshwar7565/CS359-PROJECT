@@ -1,17 +1,12 @@
 import React, {useEffect} from 'react';
 import {
     Box,
-    // Button,
     Divider,
     IconButton,
     Stack,
     Typography
 } from '@mui/material';
-import { 
-    // ArchiveBox,
-    //  CircleDashed,
-    //   MagnifyingGlass, 
-      Users } from 'phosphor-react';
+import { Users } from 'phosphor-react';
 // import { SimpleBarStyle } from '../../components/Scrollbar';
 import { useTheme } from "@mui/material/styles";
 // import useResponsive from "../../hooks/useResponsive";
@@ -29,6 +24,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FetchDirectConversations } from '../../redux/slices/conversation';
 import { useState } from 'react';
 const user_id = window.localStorage.getItem("user_id");
+
 const Chats = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
