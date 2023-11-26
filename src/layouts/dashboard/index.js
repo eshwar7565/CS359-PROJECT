@@ -7,7 +7,7 @@ import  Sidebar  from "./Sidebar";
 import {   useDispatch, useSelector } from "react-redux";
 
 
-import { SelectConversation, showSnackbar } from "../../redux/slices/app";
+import {FetchUserProfile , SelectConversation, showSnackbar } from "../../redux/slices/app";
 import { connectSocket, socket } from "../../socket";
 import {
   AddDirectMessage, 
@@ -17,8 +17,14 @@ import {
 
 import AudioCallNotification from "../../sections/dashboard/Audio/AudioCallNotification";
 
+import {
+  PushToAudioCallQueue,
+  UpdateAudioCallDialog,
+} from "../../redux/slices/audioCall";
 
-// TODO audio and video calls 
+import AudioCallDialog from "../../sections/dashboard/Audio/AudioCallDialog";
+
+// TODO  video calls 
 
 const DashboardLayout = () => {
 
@@ -29,6 +35,10 @@ const DashboardLayout = () => {
 
   // TO DO audio and video calls 
  
+  const { open_audio_notification_dialog, open_audio_dialog } = useSelector(
+    (state) => state.audioCall
+  );
+
 
   const { conversations, current_conversation } = useSelector(
     (state) => state.conversation.direct_chat
@@ -36,6 +46,19 @@ const DashboardLayout = () => {
   
 
   // Use effect and get fetch user profile need to done
+
+  useEffect(() => {
+    dispatch(FetchUserProfile());
+  }, []);
+  
+
+  const handleCloseAudioDialog = () => {
+    dispatch(UpdateAudioCallDialog({ state: false }));
+  };
+
+  // const handleCloseVideoDialog = () => {
+  //   dispatch(UpdateVideoCallDialog({ state: false }));
+  // };
 
 
   useEffect(()=>
@@ -55,6 +78,17 @@ const DashboardLayout = () => {
       {
         connectSocket(user_id);
       }
+
+      socket.on("audio_call_notification", (data) => {
+        // TODO => dispatch an action to add this in call_queue
+        dispatch(PushToAudioCallQueue(data));
+      });
+      
+      // socket.on("video_call_notification", (data) => {
+      //   // TODO => dispatch an action to add this in call_queue
+      //   dispatch(PushToVideoCallQueue(data));
+      // });
+      
 
       socket.on("new_message", (data) => {
         const message = data.message;
@@ -116,9 +150,10 @@ const DashboardLayout = () => {
       socket.off("request_sent");
       socket?.off("start_chat");
       socket?.off("new_message");
+      socket?.off("audio_call_notification");
     };
 
-  }, [conversations,current_conversation,dispatch,user_id,isLoggedIn]) ;
+  }, [conversations,current_conversation,dispatch,user_id,isLoggedIn,socket]) ;
 
 
   if (!isLoggedIn) {
@@ -127,12 +162,27 @@ const DashboardLayout = () => {
 
   
   return (
+    <>
     <Stack direction="row">
 
       <Sidebar/>
      
       <Outlet />
     </Stack>
+
+    {open_audio_notification_dialog && (
+      <AudioCallNotification open={open_audio_notification_dialog} />
+    )}
+
+    {open_audio_dialog && (
+      <AudioCallDialog
+        open={open_audio_dialog}
+        handleClose={handleCloseAudioDialog}
+      />
+    )}
+
+    
+    </>
   );
 };
 
