@@ -8,52 +8,34 @@ import {
 } from "@mui/material";
 import {  Phone } from "phosphor-react";
 import React, { useEffect, useState } from "react";
-
-
-
 import { useTheme } from "@mui/material/styles";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import { CallLogElement } from "../../components/CallElement";
 import StartCall from "../../sections/main/StartCall";
 import { useDispatch, useSelector } from "react-redux";
-
 import { FetchCallLogs } from "../../redux/slices/app"; 
-// import { CallList } from "../../data";
-
 
 const Call = () => {
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(FetchCallLogs());
-      }, []);
+    useEffect(() => {dispatch(FetchCallLogs());}, [dispatch]);
     const { call_logs } = useSelector((state) => state.app);
     const [openDialog, setOpenDialog] = useState(false);
-    const handleCloseDialog = () => {
-        setOpenDialog(false);
-    };
-    const handleOpenDialog = () => {
-        setOpenDialog(true);
-    };
+    const handleCloseDialog = () => {setOpenDialog(false);};
+    const handleOpenDialog = () => {setOpenDialog(true);};
     const theme = useTheme();
-
-
     return (
         <>
             <Stack direction="row" sx={{ width: "100%" }}>
                 {/* Left */}
-
                 <Box
                     sx={{
                         overflowY: "scroll",
-
                         height: "100vh",
                         width: 340,
                         backgroundColor: (theme) =>
                             theme.palette.mode === "light"
                                 ? "#F8FAFF"
                                 : theme.palette.background,
-
                         boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
                     }}
                 >
@@ -65,8 +47,6 @@ const Call = () => {
                         >
                             <Typography variant="h5">Call Log</Typography>
                         </Stack>
-
-
                         <Stack
                             justifyContent={"space-between"}
                             alignItems={"center"}
