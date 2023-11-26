@@ -10,7 +10,7 @@ import { Dialog,
 
 
 import { CallElement } from '../../components/CallElement';
-import { CallList } from "../../data";
+// import { CallList } from "../../data";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchAllUsers } from "../../redux/slices/app";
 import {faker} from "@faker-js/faker";

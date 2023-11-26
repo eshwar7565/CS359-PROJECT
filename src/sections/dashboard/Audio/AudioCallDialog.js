@@ -10,7 +10,7 @@ import {
     Stack,
   } from "@mui/material";
 
-  import { faker } from "@faker-js/faker";
+  // import { faker } from "@faker-js/faker";
 
   import { ZegoExpressEngine } from "zego-express-engine-webrtc"; 
 
