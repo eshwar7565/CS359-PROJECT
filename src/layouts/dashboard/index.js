@@ -49,7 +49,7 @@ const DashboardLayout = () => {
 
   useEffect(() => {
     dispatch(FetchUserProfile());
-  }, []);
+  }, [dispatch]);
   
 
   const handleCloseAudioDialog = () => {
@@ -153,7 +153,7 @@ const DashboardLayout = () => {
       socket?.off("audio_call_notification");
     };
 
-  }, [conversations,current_conversation,dispatch,user_id,isLoggedIn,socket]) ;
+  }, [conversations,current_conversation,dispatch,user_id,isLoggedIn]) ;
 
 
   if (!isLoggedIn) {

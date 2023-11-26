@@ -10,14 +10,14 @@ import FormProvider from '../../../components/hook-form/FormProvider';
 import RHFTextField from '../../../components/hook-form/RHFTextFiled';
 import {
      useDispatch, 
-    useSelector
+    // useSelector
 } from "react-redux";
 import { ForgotPassword } from '../../../redux/slices/auth';
 
 const ResetPasswordForm = () => {
     const dispatch = useDispatch();
 
-    const { isLoading } = useSelector((state) => state.auth);
+    // const { isLoading } = useSelector((state) => state.auth);
     const ResetPasswordSchema = Yup.object().shape({
         email: Yup.string()
             .required("Email is required")
@@ -36,7 +36,7 @@ const ResetPasswordForm = () => {
     reset,
     setError,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
     } = methods;
 
     const onSubmit = async (data) => {

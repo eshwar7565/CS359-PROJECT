@@ -1,4 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, {
+    //  useCallback
+     
+    //   useState
+     } from "react";
 import * as Yup from "yup";
 // form
 import { useForm } from "react-hook-form";
@@ -13,7 +17,7 @@ import { UpdateUserProfile } from "../../../redux/slices/app";
 
 const ProfileForm = () => {
       const dispatch = useDispatch();
-      const [file, setFile] = useState();
+    //   const [ setFile] = useState();
       const { user } = useSelector((state) => state.app);
       console.log(user);
 
@@ -35,15 +39,15 @@ const ProfileForm = () => {
     });
 
     const {
-        reset,
-        watch,
-        control,
-        setValue,
+        // reset,
+        // watch,
+        // control,
+        // setValue,
         handleSubmit,
-        formState: { isSubmitting, isSubmitSuccessful },
+        // formState: { isSubmitting, isSubmitSuccessful },
     } = methods;
 
-    const values = watch();
+    // const values = watch();
 
     const onSubmit = async (data) => {
         try {
@@ -61,22 +65,22 @@ const ProfileForm = () => {
         }
     };
 
-    const handleDrop = useCallback(
-        (acceptedFiles) => {
-            const file = acceptedFiles[0];
+    // const handleDrop = useCallback(
+    //     (acceptedFiles) => {
+    //         const file = acceptedFiles[0];
 
-            setFile(file);
+    //         setFile(file);
 
-            const newFile = Object.assign(file, {
-                preview: URL.createObjectURL(file),
-            });
+    //         const newFile = Object.assign(file, {
+    //             preview: URL.createObjectURL(file),
+    //         });
 
-            if (file) {
-                setValue("avatar", newFile, { shouldValidate: true });
-            }
-        },
-        [setValue]
-    );
+    //         if (file) {
+    //             setValue("avatar", newFile, { shouldValidate: true });
+    //         }
+    //     },
+    //     [setValue]
+    // );
 
     return (
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

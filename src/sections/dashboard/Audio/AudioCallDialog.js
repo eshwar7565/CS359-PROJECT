@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef,useMemo,useCallback } from "react";
 
 import {
     Avatar,
@@ -28,7 +28,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
   const CallDialog = ({ open, handleClose }) => {
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.app);
+    // const { user } = useSelector((state) => state.app);
     const audioStreamRef = useRef(null);
   
     //* Use params from call_details if available => like in case of receiver's end
@@ -53,11 +53,17 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     // Step 1
   
     // Initialize the ZegoExpressEngine instance
-    const zg = new ZegoExpressEngine(appID, server);
+    const zg = useMemo(() => {
+      // Your 'zg' object construction logic here
+      return new ZegoExpressEngine(appID,server);
+    }, []); // Empty dependency array means it only gets created once
   
     const streamID = call_details?.streamID;
   
-    const handleDisconnect = (event, reason) => {
+  
+
+    const handleDisconnect = useCallback((event, reason) => {
+      // Your existing implementation...
       if (reason && reason === "backdropClick") {
         return;
       } else {
@@ -81,8 +87,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   
         // at the end call handleClose Dialog
         handleClose();
-      }
-    };
+
+    }}, [dispatch,zg, streamID, userID, audioStreamRef, roomID, handleClose]);
   
     useEffect(() => {
       // TODO => emit audio_call event
@@ -302,7 +308,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
         .catch((err) => {
           console.log(err);
         });
-    }, []);
+    }, [handleDisconnect,incoming,roomID,streamID,token,userID,userName,zg]);
   
     return (
       <>

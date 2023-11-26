@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker";
 import {
   Avatar,
   Button,
@@ -23,7 +22,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   const CallNotification = ({ open, handleClose }) => {
     const dispatch = useDispatch();
   
-    const { user } = useSelector((state) => state.app);
+    // const { user } = useSelector((state) => state.app); 
     const [call_details] = useSelector((state) => state.audioCall.call_queue);
   
     const handleAccept = () => {

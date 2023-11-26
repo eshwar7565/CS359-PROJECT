@@ -21,10 +21,12 @@ import {
 } from "phosphor-react";
 
 import { useTheme } from "@mui/material/styles";
-import { faker } from "@faker-js/faker";
+// import { faker } from "@faker-js/faker";
 import ThemeDialog from "../../sections/settings/settings/ThemeDialog";
 import ShortcutDialog from "../../sections/settings/settings/Shortcuts";
-import { useDispatch, useSelector } from "react-redux";
+import { 
+    // useDispatch,
+     useSelector } from "react-redux";
 const Settings = () => {
     const theme = useTheme();
     const { user } = useSelector((state) => state.app);

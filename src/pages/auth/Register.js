@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import { Link, Stack, Typography } from '@mui/material';
 import RegisterForm from '../../sections/settings/auth/RegisterForm';
-import AuthSocial from '../../sections/settings/auth/AuthSocial';
+// import AuthSocial from '../../sections/settings/auth/AuthSocial';
 
 const Register = () => {
     return (
