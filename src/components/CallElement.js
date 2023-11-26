@@ -16,7 +16,7 @@ import {
 } from "phosphor-react";
 import { useDispatch } from "react-redux";
 
-import { faker } from '@faker-js/faker';
+
 
 const StyledChatBox = styled(Box)(({ theme }) => ({
     "&:hover": {
@@ -53,7 +53,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
-const CallLogElement = ({ img, name, incoming, missed, online, id }) => {
+const CallLogElement = ({  name, incoming, missed, online, id }) => {
     const theme = useTheme();
 
     return (
@@ -80,10 +80,10 @@ const CallLogElement = ({ img, name, incoming, missed, online, id }) => {
                             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                             variant="dot"
                         >
-                            <Avatar alt={faker.name.fullName()} src={faker.image.avatar()} />
+                            <Avatar  />
                         </StyledBadge>
                     ) : (
-                        <Avatar alt={faker.name.fullName()} src={faker.image.avatar()} />
+                        <Avatar  />
                     )}
                     <Stack spacing={0.3}>
                         <Typography variant="subtitle2">{name}</Typography>

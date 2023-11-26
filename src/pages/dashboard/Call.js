@@ -6,14 +6,9 @@ import {
     Typography,
     Link,
 } from "@mui/material";
-
-import { MagnifyingGlass, Phone } from "phosphor-react";
+import {  Phone } from "phosphor-react";
 import React, { useEffect, useState } from "react";
-import {
-    Search,
-    SearchIconWrapper,
-    StyledInputBase,
-} from "../../components/Search";
+
 
 
 import { useTheme } from "@mui/material/styles";
@@ -23,7 +18,7 @@ import StartCall from "../../sections/main/StartCall";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FetchCallLogs } from "../../redux/slices/app"; 
-import { CallList } from "../../data";
+// import { CallList } from "../../data";
 
 
 const Call = () => {
@@ -71,17 +66,6 @@ const Call = () => {
                             <Typography variant="h5">Call Log</Typography>
                         </Stack>
 
-                        <Stack sx={{ width: "100%" }}>
-                            <Search>
-                                <SearchIconWrapper>
-                                    <MagnifyingGlass color="#709CE6" />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    inputProps={{ "aria-label": "search" }}
-                                />
-                            </Search>
-                        </Stack>
 
                         <Stack
                             justifyContent={"space-between"}
@@ -99,7 +83,7 @@ const Call = () => {
                         <Stack sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}>
                             <SimpleBarStyle timeout={500} clickOnTrack={false}>
                                 <Stack spacing={2.4}>
-                                    {CallList.map((el, idx) => {
+                                    {call_logs.map((el, idx) => {
                                         return <CallLogElement key={idx} {...el} />;
                                     })}
                                 </Stack>

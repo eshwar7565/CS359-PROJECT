@@ -30,7 +30,7 @@ const Message = ({menu}) => {
   
       socket.emit("get_messages", { conversation_id: current?.id }, (data) => {
         // data => list of messages
-        console.log(data, "List of messages");
+        // console.log(data, "List of messages");
         dispatch(FetchCurrentMessages({ messages: data }));
       });
       socket.on("new_message", (data) => {

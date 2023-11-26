@@ -7,7 +7,7 @@ import { Dialog,
     Stack, 
 } from '@mui/material';
 
-import { MembersList } from '../../data';
+
 
 import { CallElement } from '../../components/CallElement';
 import { CallList } from "../../data";
@@ -24,9 +24,9 @@ const StartCall = ({ open, handleClose }) => {
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(FetchAllUsers());
-    }, []);
+    }, [dispatch]);
 
-    console.log(CallList, all_users, "Call List Info");
+    // console.log(CallList, all_users, "Call List Info");
 
     const list = all_users.map((el) => ({
         id: el?._id,
@@ -53,7 +53,7 @@ const StartCall = ({ open, handleClose }) => {
             
                     <Stack spacing={2.4}>
                     
-                        {MembersList.map((el) => { // changing this to list will trigger the for users
+                        {list.map((el) => { // changing this to list will trigger the for users
                             return <CallElement  {...el} handleClose={handleClose} />;
                         })}
                     </Stack>

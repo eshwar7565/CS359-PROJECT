@@ -14,13 +14,20 @@ import {
     // CaretDown, MagnifyingGlass, 
     Phone, VideoCamera } from 'phosphor-react';
 
+    // import useResponsive from "../../hooks/useResponsive";
+
 // import { ToggleSidebar } from '../../redux/slices/app';
 import { 
-    // useDispatch
+    useDispatch ,
     useSelector } from 'react-redux';
+
+    import { StartAudioCall } from "../../redux/slices/audioCall";
+    // import { StartVideoCall } from "../../redux/slices/videoCall"; 
+    
+    
 const Header = () => {
     const theme = useTheme();
-    // const dispatch =useDispatch();
+    const dispatch =useDispatch();
 
     const {current_conversation} = useSelector((state) => state.conversation.direct_chat);
     
@@ -62,10 +69,7 @@ const Header = () => {
                             }}
                             variant="dot"
                         >
-                            <Avatar
-
-                             
-                            />
+                            <Avatar/>
                         </StyledBadge>
 
                     </Box>
@@ -75,7 +79,7 @@ const Header = () => {
                         
                           {current_conversation?.name}
                         </Typography>
-                        <Typography variant='caption' >
+                        <Typography variant="caption" >
                             Online
                         </Typography>
                     </Stack>
@@ -87,7 +91,12 @@ const Header = () => {
                         <VideoCamera>
                         </VideoCamera>
                     </IconButton>
-                    <IconButton>
+                    <IconButton 
+                    onClick={() => {
+                
+                        dispatch(StartAudioCall(current_conversation.user_id));
+                      }} 
+                    >
                         <Phone>
                         </Phone>
                     </IconButton>

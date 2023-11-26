@@ -77,6 +77,9 @@ const slice = createSlice({
       state.users = action.payload.users ;
 
     },
+    updateAllUsers(state, action) {
+      state.all_users = action.payload.users;
+    },
     updateFriends(state,action)
     {
       state.users = action.payload.friends ;
